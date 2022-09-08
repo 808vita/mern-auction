@@ -39,8 +39,40 @@ const createAuction = async (req, res) => {
 	}
 };
 
+// update / accept a bid
+
+const acceptBid = async (req, res) => {
+	const { id } = req.params;
+
+	if (!mongoose.Types.ObjectId.isValid(id)) {
+		return res.json(404).json({ error: "no such record" });
+	}
+
+	// this could be threat all details can be modified
+	//create status key:value in model
+	// let only status and bid _id from dealer to be fed in
+	//might need to validate the dealer bid contains the current auction id
+	//but seems extensive -> add if time allows
+
+	const auction = await Owner.findOneAndUpdate(
+		{ _id: id },
+		{
+			...req.body,
+		}
+	);
+
+	if (!workout) {
+		return res.status(400).json({
+			error: "no such workout",
+		});
+	}
+
+	res.status(200).json(workout);
+};
+
 module.exports = {
 	getAuctions,
 	getAuction,
 	createAuction,
+	acceptBid,
 };

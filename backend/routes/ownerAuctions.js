@@ -3,6 +3,7 @@ const {
 	getAuctions,
 	getAuction,
 	createAuction,
+	acceptBid,
 } = require("../controllers/ownerControllers");
 
 const router = express.Router();
@@ -21,9 +22,6 @@ router.get("/closed", (req, res) => {
 
 router.post("/", createAuction);
 
-router.patch("/:id", (req, res) => {
-	const id = "auction id";
-	res.json({ msg: "patch a bid record : " + id });
-});
+router.patch("/:id", acceptBid);
 
 module.exports = router;
