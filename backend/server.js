@@ -1,6 +1,9 @@
 require("dotenv").config();
 
 const express = require("express");
+const mongoose = require("mongoose");
+const dealerRoutes = require("./routes/dealerAuctions");
+const ownerRoutes = require("./routes/ownerAuctions");
 
 const app = express();
 
@@ -15,10 +18,17 @@ app.use((req, res, next) => {
 const port = process.env.PORT;
 
 //routes
-app.get("/", (req, res) => {
-	res.json({ msg: `Listening on port ${port}` });
-});
+app.use("/api/dealer-auctions", dealerRoutes);
 
-app.listen(port, () => {
-	console.log(`Listening on port ${port}`);
-});
+app.use("/api/owner-auctions", ownerRoutes);
+
+mongoose
+	.connect(process.env.MONG_URI)
+	.then(() => {
+		app.listen(port, () => {
+			console.log(` connected to db & Listening on port ${port}`);
+		});
+	})
+	.catch((error) => {
+		console.log(error);
+	});
