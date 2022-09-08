@@ -4,6 +4,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const dealerRoutes = require("./routes/dealerAuctions");
 const ownerRoutes = require("./routes/ownerAuctions");
+const userRoutes = require("./routes/users");
 
 const app = express();
 
@@ -21,6 +22,8 @@ const port = process.env.PORT;
 app.use("/api/dealer-auctions", dealerRoutes);
 
 app.use("/api/owner-auctions", ownerRoutes);
+
+app.use("/api/user", userRoutes);
 
 mongoose
 	.connect(process.env.MONG_URI)
