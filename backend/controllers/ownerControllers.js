@@ -1,4 +1,4 @@
-const Owner = require("../models/OwnerModel");
+const Owner = require("../models/ownerModel");
 
 const mongoose = require("mongoose");
 
