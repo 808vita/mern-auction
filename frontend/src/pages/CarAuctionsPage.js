@@ -22,10 +22,7 @@ const CarAuctionsPage = () => {
 			<div className="carDetailsList">
 				{carDetailsList &&
 					carDetailsList.map((carDetails) => (
-						<CarAuctionDeatils
-							key={carDetailsList._id}
-							carDetails={carDetails}
-						/>
+						<CarAuctionDeatils key={carDetails._id} carDetails={carDetails} />
 					))}
 			</div>
 		</div>

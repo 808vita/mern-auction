@@ -1,4 +1,6 @@
 import "./App.css";
+import CreateAuctionForm from "./components/auctionComponents/CreateAuctionForm";
+import CreateBidForm from "./components/bidComponents/CreateBidForm";
 import Header from "./components/Header";
 import LoginForm from "./components/LoginForm";
 import SignupForm from "./components/SignupForm";
@@ -13,6 +15,8 @@ function App() {
 			{/* <SignupForm /> */}
 			<CarAuctionsPage />
 			<CarBidsPage />
+			<CreateAuctionForm />
+			<CreateBidForm />
 		</div>
 	);
 }
