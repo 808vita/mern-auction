@@ -1,97 +1,65 @@
-import React from "react";
+import React, { useState } from "react";
+import { LongButton } from "./ButtonComponents";
 
 const SignupForm = () => {
+	const [email, setEmail] = useState("");
+	const [password, setPassword] = useState("");
+	const [name, setName] = useState("");
+	const [accountType, setAccountType] = useState("");
+	const [error, setError] = useState(null);
+
 	return (
 		<>
-			<div className="container-fluid">
-				<h6 className="mb-3 text-start">Sign Up</h6>
-				<form className="needs-validation" noValidate="">
+			<div className="container-fluid center-form">
+				<h6 className="mb-3 text-center">Sign Up</h6>
+				<form className="signup">
 					<div className="row g-3">
-						<div className="col-6">
+						<div className="col-sm-12">
 							<input
 								type="email"
 								className="form-control rounded-edges"
 								id="email"
 								placeholder="Email"
-								required=""
+								required
+								onChange={(e) => setEmail(e.target.value)}
+								value={email}
 							></input>
 							<div className="invalid-feedback">
 								Please enter a valid email address for shipping updates.
 							</div>
 						</div>
-						<div className="col-6">
+
+						<div className="col-sm-12">
 							<input
 								type="text"
 								className="form-control rounded-edges"
-								id="address"
-								placeholder="Address"
+								id="name"
+								placeholder="Name"
+								onChange={(e) => setName(e.target.value)}
+								value={name}
 								required=""
 							></input>
-							<div className="invalid-feedback">
-								Please enter your shipping address.
-							</div>
+							<div className="invalid-feedback">Valid name is required.</div>
 						</div>
-						<div className="col-sm-6">
+						<div className="col-sm-12">
 							<input
-								type="text"
+								type="password"
 								className="form-control rounded-edges"
-								id="firstName"
-								placeholder="First name"
-								// value=""
-								required=""
-							></input>
-							<div className="invalid-feedback">
-								Valid first name is required.
-							</div>
-						</div>
-						<div className="col-6">
-							<input
-								type="text"
-								className="form-control rounded-edges"
-								id="city"
-								placeholder="City"
+								id="password"
+								placeholder="Password"
+								onChange={(e) => setPassword(e.target.value)}
+								value={password}
 								required=""
 							></input>
 						</div>
-						<div className="col-sm-6">
-							<input
-								type="text"
-								className="form-control rounded-edges"
-								id="lastName"
-								placeholder="Last name"
-								// value=""
-								required=""
-							></input>
-							<div className="invalid-feedback">
-								Valid last name is required.
-							</div>
-						</div>
-						<div className="col-md-6">
-							<input
-								type="text"
-								className="form-control rounded-edges"
-								id="zip"
-								placeholder="Zip"
-								required=""
-							></input>
-							<div className="invalid-feedback">Zip code required.</div>
-						</div>
-						<div className="col-md-6">
-							<input
-								type="tel"
-								className="form-control rounded-edges"
-								id="phone-number"
-								placeholder="Phone Number"
-								required=""
-								pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}"
-							/>
-							<div className="invalid-feedback">Phone Number is required</div>
-						</div>
-						<div className="col-md-6">
+
+						<div className="col-sm-12">
 							<select
 								className="form-select rounded-edges"
-								id="country"
+								id="account-type"
 								required=""
+								onChange={(e) => setAccountType(e.target.value)}
+								value={accountType}
 							>
 								{/* <option value="">Choose...</option> */}
 								<option>Account Type</option>
@@ -102,6 +70,7 @@ const SignupForm = () => {
 								Please select an Account Type.
 							</div>
 						</div>
+						<LongButton text={"SIGN UP"} type={"green"} />
 					</div>
 				</form>
 			</div>

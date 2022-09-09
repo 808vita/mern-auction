@@ -134,3 +134,11 @@
   .logo-img-cat{
     border-radius: 100%;
   }
+
+  .center-form{
+    max-width: 600px;
+  }
+
+  .center-page{
+    max-width: 1000px;
+  }

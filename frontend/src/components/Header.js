@@ -21,23 +21,23 @@ const Header = () => {
 
 				<ul className="nav col-12 col-md-auto d-flex align-items-center mb-2 justify-content-around mb-md-0 gap-5 ">
 					<li>
-						<p className="nav-link px-2 link-secondary">Men</p>
+						<p className="nav-link px-2 link-secondary">Pending</p>
 					</li>
 					<li>
-						<p className="nav-link px-2 link-dark">Women</p>
+						<p className="nav-link px-2 link-dark">Closed</p>
 					</li>
 					<li>
-						<p className="nav-link px-2 link-dark">Kids</p>
+						<p className="nav-link px-2 link-dark">Create</p>
 					</li>
 				</ul>
 
 				<div className="col-md-3 text-end">
-					<button type="button" className="btn">
+					{/* <button type="button" className="btn">
 						<i className="fas fa-search h4"></i>
 					</button>
 					<button type="button" className="btn">
 						<i className="fas fa-shopping-cart h4"></i>
-					</button>
+					</button> */}
 					<button type="button" className="btn">
 						<i className="far fa-user h4"></i>
 					</button>
