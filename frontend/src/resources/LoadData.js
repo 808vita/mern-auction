@@ -1,4 +1,4 @@
-export const loginUser = async (email, password) => {
+export const loginUser = async (email, password, setAuth, setUserInfo) => {
 	// setLoading(true);
 
 	try {
@@ -15,20 +15,31 @@ export const loginUser = async (email, password) => {
 		if (!response.ok) {
 			console.log(json.error);
 			// setLoading(false);
+			setAuth(false);
 		}
 
 		if (response.ok) {
 			console.log("oof", json);
+			setAuth(true);
+			setUserInfo(json);
 			// setLoading(false);
 			localStorage.setItem("user", JSON.stringify(json));
 		}
 	} catch (error) {
 		console.log("error", error);
 		// setLoading(false);
+		setAuth(false);
 	}
 };
 
-export const signupUser = async (email, password, name, accountType) => {
+export const signupUser = async (
+	email,
+	password,
+	name,
+	accountType,
+	setAuth,
+	setUserInfo
+) => {
 	// setLoading(true);
 
 	let isDealer = "";
@@ -53,15 +64,19 @@ export const signupUser = async (email, password, name, accountType) => {
 		if (!response.ok) {
 			console.log(json.error);
 			// setLoading(false);
+			setAuth(false);
 		}
 
 		if (response.ok) {
 			console.log("oof", json);
 			// setLoading(false);
+			setAuth(true);
+			setUserInfo(json);
 			localStorage.setItem("user", JSON.stringify(json));
 		}
 	} catch (error) {
 		console.log("error", error);
 		// setLoading(false);
+		setAuth(false);
 	}
 };

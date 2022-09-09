@@ -1,17 +1,19 @@
 import React, { useState } from "react";
 import { signupUser } from "../resources/LoadData";
 import { LongButton } from "./ButtonComponents";
+import { useGlobalContext } from "../hooks/useGlobalContext";
 
 const SignupForm = () => {
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
 	const [name, setName] = useState("");
 	const [accountType, setAccountType] = useState("Owner");
-	const [error, setError] = useState(null);
+
+	const { setAuth, setUserInfo } = useGlobalContext();
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
-		await signupUser(email, password, name, accountType);
+		await signupUser(email, password, name, accountType, setAuth, setUserInfo);
 	};
 
 	return (
@@ -43,7 +45,7 @@ const SignupForm = () => {
 								placeholder="Name"
 								onChange={(e) => setName(e.target.value)}
 								value={name}
-								required=""
+								required
 							></input>
 							<div className="invalid-feedback">Valid name is required.</div>
 						</div>
@@ -55,7 +57,7 @@ const SignupForm = () => {
 								placeholder="Password"
 								onChange={(e) => setPassword(e.target.value)}
 								value={password}
-								required=""
+								required
 							></input>
 						</div>
 
@@ -63,7 +65,7 @@ const SignupForm = () => {
 							<select
 								className="form-select rounded-edges"
 								id="account-type"
-								required=""
+								required
 								onChange={(e) => setAccountType(e.target.value)}
 								value={accountType}
 							>

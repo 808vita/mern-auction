@@ -1,15 +1,17 @@
 import React, { useState } from "react";
 import { loginUser } from "../resources/LoadData";
 import { LongButton } from "./ButtonComponents";
+import { useGlobalContext } from "../hooks/useGlobalContext";
 
 const LoginForm = () => {
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
-	const [error, setError] = useState(null);
+
+	const { setAuth, setUserInfo } = useGlobalContext();
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
-		await loginUser(email, password);
+		await loginUser(email, password, setAuth, setUserInfo);
 	};
 
 	return (
@@ -41,7 +43,7 @@ const LoginForm = () => {
 								placeholder="Password"
 								onChange={(e) => setPassword(e.target.value)}
 								value={password}
-								required=""
+								required
 							></input>
 						</div>
 
