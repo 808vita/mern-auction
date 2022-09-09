@@ -1,4 +1,6 @@
 const Owner = require("../models/ownerModel");
+const Dealer = require("../models/dealerModel");
+const User = require("../models/userModel");
 
 const mongoose = require("mongoose");
 
@@ -40,8 +42,8 @@ const createAuction = async (req, res) => {
 	try {
 		const user_id = req.user._id;
 		const isDealer = req.isDealer.isDealer;
-		console.log(isDealer);
-		const staus = "open";
+		console.log(user_id);
+		const status = "open";
 		const selectedDealer = "dealOpen";
 		if (isDealer === true) {
 			return res
@@ -53,7 +55,7 @@ const createAuction = async (req, res) => {
 			year,
 			km,
 			user_id,
-			staus,
+			status,
 			selectedDealer,
 		});
 		res.status(200).json(auction);
@@ -65,11 +67,46 @@ const createAuction = async (req, res) => {
 // update / accept a bid
 
 const acceptBid = async (req, res) => {
-	const { id } = req.params;
+	const { bidId } = req.params;
 
-	if (!mongoose.Types.ObjectId.isValid(id)) {
+	const status = "closed";
+
+	if (!mongoose.Types.ObjectId.isValid(bidId)) {
 		return res.json(404).json({ error: "no such record" });
 	}
+	const bid = await Dealer.findById(bidId);
+	console.log(bid);
+	if (!bid) {
+		return res.status(404).json({ error: "no such record" });
+	}
+	const { auction_id } = bid;
+	const setToRejected = await Dealer.updateMany({
+		auction_id,
+		status: "rejected",
+	});
+	let SelectedBid = await Dealer.findOneAndUpdate({
+		_id: bidId,
+		status: "selected",
+	});
+	SelectedBid = await Dealer.findOne({
+		_id: bidId,
+	});
+	// console.log(SelectedBid);
+
+	const { user_id: selectedDealer } = SelectedBid;
+	let completeAuction = await Owner.findOneAndUpdate({
+		_id: auction_id.auction_id,
+		status: "completed",
+		selectedDealer: selectedDealer,
+	});
+
+	completeAuction = await Owner.findOne({
+		_id: completeAuction._id,
+	});
+
+	let dealerDetails = await User.findOne({
+		_id: selectedDealer,
+	});
 
 	// this could be threat all details can be modified
 	//create status key:value in model
@@ -77,20 +114,40 @@ const acceptBid = async (req, res) => {
 	//might need to validate the dealer bid contains the current auction id
 	//but seems extensive -> add if time allows
 
-	const auction = await Owner.findOneAndUpdate(
-		{ _id: id },
-		{
-			...req.body,
-		}
-	);
+	// const auction = await Owner.findOneAndUpdate(
+	// 	{ _id: id },
+	// 	{
+	// 		status
+	// 	}
+	// );
 
-	if (!workout) {
-		return res.status(400).json({
-			error: "no such workout",
-		});
+	// if (!auction) {
+	// 	return res.status(400).json({
+	// 		error: "no such workout",
+	// 	});
+	// }
+
+	// res.status(200).json(auction);
+
+	res.status(200).json({ SelectedBid, completeAuction, dealerDetails });
+};
+
+const getBids = async (req, res) => {
+	const { auction_id } = req.params;
+	const user_id = req.user._id;
+	const isDealer = req.isDealer.isDealer;
+
+	if (!mongoose.Types.ObjectId.isValid(auction_id)) {
+		return res.json(404).json({ error: "no such record" });
 	}
 
-	res.status(200).json(workout);
+	const auctions = await Dealer.find({ auction_id }).sort({ createdAt: -1 });
+	// console.log(auctions);
+	if (!auctions) {
+		return res.status(404).json({ error: "no such record" });
+	}
+
+	res.status(200).json(auctions);
 };
 
 module.exports = {
@@ -98,4 +155,5 @@ module.exports = {
 	getAuction,
 	createAuction,
 	acceptBid,
+	getBids,
 };

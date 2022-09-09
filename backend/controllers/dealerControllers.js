@@ -6,7 +6,8 @@ const mongoose = require("mongoose");
 //get all auctions
 //need show only auctions with pending status - right now shows every record
 const getAuctions = async (req, res) => {
-	const auctions = await Owner.find({}).sort({ createdAt: -1 });
+	const status = "open";
+	const auctions = await Owner.find({ status }).sort({ createdAt: -1 });
 
 	res.status(200).json(auctions);
 };
@@ -23,7 +24,6 @@ const getBids = async (req, res) => {
 			.json({ error: "owners are not allowed to use dealers endpoints" });
 	}
 	const auctions = await Dealer.find({ user_id }).sort({ createdAt: -1 });
-
 	res.status(200).json(auctions);
 };
 
@@ -35,7 +35,7 @@ const createBid = async (req, res) => {
 	const { auction_id, price } = req.body;
 	const user_id = req.user._id;
 	const isDealer = req.isDealer.isDealer;
-	const staus = "open";
+	const status = "open";
 
 	if (isDealer === false) {
 		return res
@@ -47,19 +47,19 @@ const createBid = async (req, res) => {
 		return res.status(404).json({ error: "no such record" });
 	}
 	const auction = await Owner.findById(auction_id);
-
+	// console.log(auction);
 	if (!auction) {
 		return res.status(404).json({ error: "no such record" });
 	}
 
 	const existBid = await Dealer.find({ auction_id, user_id });
-	// console.log(existBid);
-	if (existBid) {
+	// console.log("oof", existBid);
+	if (existBid.length > 0) {
 		return res.status(404).json({ error: "already bid exists" });
 	}
 
 	try {
-		const bid = await Dealer.create({ auction_id, price, user_id, staus });
+		const bid = await Dealer.create({ auction_id, price, user_id, status });
 		res.status(200).json(bid);
 	} catch (error) {
 		res.status(400).json({ error: error.message });

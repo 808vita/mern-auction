@@ -20,7 +20,7 @@ const ownerSchema = new Schema(
 			type: String,
 			required: true,
 		},
-		staus: {
+		status: {
 			type: String,
 			required: true,
 		},

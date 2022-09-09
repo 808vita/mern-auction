@@ -4,6 +4,7 @@ const {
 	getAuction,
 	createAuction,
 	acceptBid,
+	getBids,
 } = require("../controllers/ownerControllers");
 
 const requireAuth = require("../middleware/requireAuth");
@@ -17,6 +18,8 @@ router.get("/", getAuctions);
 
 router.get("/:id", getAuction);
 
+router.get("/:auction_id/get-bids", getBids);
+
 router.get("/pending", (req, res) => {
 	res.json({ msg: "get all pending owner-auctions" });
 });
@@ -27,6 +30,6 @@ router.get("/closed", (req, res) => {
 
 router.post("/", createAuction);
 
-router.patch("/:id", acceptBid);
+router.patch("/accept-bid/:bidId", acceptBid);
 
 module.exports = router;
