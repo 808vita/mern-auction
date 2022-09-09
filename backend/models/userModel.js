@@ -18,11 +18,15 @@ const userSchema = new Schema({
 		type: Boolean,
 		required: true,
 	},
+	name: {
+		type: String,
+		required: true,
+	},
 });
 
 //static signup method
-userSchema.statics.signup = async function (email, password, isDealer) {
-	if (!email || !password || typeof isDealer !== "boolean") {
+userSchema.statics.signup = async function (email, password, isDealer, name) {
+	if (!email || !password || typeof isDealer !== "boolean" || !name) {
 		throw Error("All fields must be filled with valid details");
 	}
 
@@ -42,6 +46,7 @@ userSchema.statics.signup = async function (email, password, isDealer) {
 		email,
 		password: hash,
 		isDealer,
+		name,
 	});
 
 	return user;

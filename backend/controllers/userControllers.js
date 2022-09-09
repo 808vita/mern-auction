@@ -11,12 +11,13 @@ const loginUser = async (req, res) => {
 
 	try {
 		const user = await User.login(email, password);
-		const { isDealer } = user;
+		const { isDealer, name } = user;
+
 		// create a token
 
 		const token = createToken(user._id, user.isDealer);
 
-		res.status(200).json({ email, isDealer, token });
+		res.status(200).json({ email, isDealer, name, token });
 	} catch (error) {
 		res.status(400).json({ error: error.message });
 	}
@@ -25,16 +26,16 @@ const loginUser = async (req, res) => {
 //signup user
 
 const signupUser = async (req, res) => {
-	const { email, password, isDealer } = req.body;
+	const { email, password, isDealer, name } = req.body;
 
 	try {
-		const user = await User.signup(email, password, isDealer);
+		const user = await User.signup(email, password, isDealer, name);
 
 		//create a token
 
 		const token = createToken(user._id, user.isDealer);
 
-		res.status(200).json({ email, isDealer, token });
+		res.status(200).json({ email, isDealer, name, token });
 	} catch (error) {
 		res.status(400).json({ error: error.message });
 	}
