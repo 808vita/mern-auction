@@ -1,11 +1,11 @@
 import React from "react";
 
-export const BigButton = ({ text, type }) => {
+export const BigButton = ({ text, type = "button", color }) => {
 	return (
 		<button
-			type="button"
+			type={type}
 			className={`btn rounded-button ${
-				type === "green" ? "btn-primary" : "outline-button"
+				color === "green" ? "btn-primary" : "outline-button"
 			}`}
 		>
 			{text}
@@ -13,12 +13,12 @@ export const BigButton = ({ text, type }) => {
 	);
 };
 
-export const LongButton = ({ text, type }) => {
+export const LongButton = ({ text, type = "button", color }) => {
 	return (
 		<button
-			type="button"
+			type={type}
 			className={`btn rounded-button ${
-				type === "green" ? "btn-primary" : "outline-button-long"
+				color === "green" ? "btn-primary" : "outline-button-long"
 			}`}
 		>
 			{text}

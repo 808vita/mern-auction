@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { loginUser } from "../resources/LoadData";
 import { LongButton } from "./ButtonComponents";
 
 const LoginForm = () => {
@@ -6,11 +7,16 @@ const LoginForm = () => {
 	const [password, setPassword] = useState("");
 	const [error, setError] = useState(null);
 
+	const handleSubmit = async (e) => {
+		e.preventDefault();
+		await loginUser(email, password);
+	};
+
 	return (
 		<>
 			<div className="container-fluid center-form">
 				<h6 className="mb-3 text-center">Login</h6>
-				<form className="signup">
+				<form className="login" onSubmit={handleSubmit}>
 					<div className="row g-3">
 						<div className="col-sm-12">
 							<input
@@ -39,7 +45,7 @@ const LoginForm = () => {
 							></input>
 						</div>
 
-						<LongButton text={"Login"} type={"green"} />
+						<LongButton text={"Login"} type={"submit"} color={"green"} />
 					</div>
 				</form>
 			</div>

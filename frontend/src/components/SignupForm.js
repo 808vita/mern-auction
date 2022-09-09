@@ -1,18 +1,24 @@
 import React, { useState } from "react";
+import { signupUser } from "../resources/LoadData";
 import { LongButton } from "./ButtonComponents";
 
 const SignupForm = () => {
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
 	const [name, setName] = useState("");
-	const [accountType, setAccountType] = useState("");
+	const [accountType, setAccountType] = useState("Owner");
 	const [error, setError] = useState(null);
+
+	const handleSubmit = async (e) => {
+		e.preventDefault();
+		await signupUser(email, password, name, accountType);
+	};
 
 	return (
 		<>
 			<div className="container-fluid center-form">
 				<h6 className="mb-3 text-center">Sign Up</h6>
-				<form className="signup">
+				<form className="signup" onSubmit={handleSubmit}>
 					<div className="row g-3">
 						<div className="col-sm-12">
 							<input
@@ -62,7 +68,7 @@ const SignupForm = () => {
 								value={accountType}
 							>
 								{/* <option value="">Choose...</option> */}
-								<option>Account Type</option>
+
 								<option>Owner</option>
 								<option>Dealer</option>
 							</select>
@@ -70,7 +76,7 @@ const SignupForm = () => {
 								Please select an Account Type.
 							</div>
 						</div>
-						<LongButton text={"SIGN UP"} type={"green"} />
+						<LongButton text={"SIGN UP"} type={"submit"} color={"green"} />
 					</div>
 				</form>
 			</div>
