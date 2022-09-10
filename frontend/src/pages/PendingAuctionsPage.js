@@ -10,7 +10,8 @@ const PendingAuctionsPage = () => {
 	}, []);
 
 	return (
-		<div>
+		<div className="container-fluid  mb-3 ">
+			<h6 className="mb-3 text-center">Pending Auctions</h6>
 			{pendingAuctions?.map((data) => (
 				<OwnerPendingAuctions key={data._id} data={data} />
 			))}
