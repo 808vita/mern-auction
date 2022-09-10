@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { LongButton } from "./ButtonComponents";
 import { useGlobalContext } from "../hooks/useGlobalContext";
-
+import { createBid } from "../resources/LoadData";
 const CreateBid = () => {
 	const [price, setPrice] = useState("");
 
@@ -12,15 +12,10 @@ const CreateBid = () => {
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
-		// await signupUser(
-		// 	email,
-		// 	password,
-		// 	name,
-		// 	accountType,
-		// 	setAuth,
-		// 	setUserInfo,
-		// 	navigate
-		// );
+
+		// await createBid(
+		//     auction_id,price,navigate
+		// )
 	};
 
 	return (

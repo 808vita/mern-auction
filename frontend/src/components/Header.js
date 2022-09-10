@@ -1,6 +1,11 @@
 import React from "react";
+import { useGlobalContext } from "../hooks/useGlobalContext";
+import { useNavigate } from "react-router-dom";
 
 const Header = () => {
+	const { loading, setLoading, Auth, setAuth, userInfo, setUserInfo, logout } =
+		useGlobalContext();
+
 	return (
 		<div className="container-xxl">
 			<header className="d-flex flex-wrap align-items-center justify-content-around justify-content-md-around py-3 mb-3 border-bottom">

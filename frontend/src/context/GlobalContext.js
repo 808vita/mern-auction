@@ -6,7 +6,6 @@ export const GlobalContextProvider = ({ children }) => {
 	const [loading, setLoading] = useState(false);
 	const [Auth, setAuth] = useState(false);
 	const [userInfo, setUserInfo] = useState({});
-	let navigate;
 
 	const logout = (navigate) => {
 		localStorage.removeItem("token");
@@ -25,7 +24,6 @@ export const GlobalContextProvider = ({ children }) => {
 				userInfo,
 				setUserInfo,
 				logout,
-				navigate,
 			}}
 		>
 			{children}
