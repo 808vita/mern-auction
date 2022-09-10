@@ -19,18 +19,6 @@ const Header = () => {
 					</h4>
 				</a>
 
-				<ul className="nav col-12 col-md-auto d-flex align-items-center mb-2 justify-content-around mb-md-0 gap-5 ">
-					<li>
-						<p className="nav-link px-2 link-secondary">Pending</p>
-					</li>
-					<li>
-						<p className="nav-link px-2 link-dark">Closed</p>
-					</li>
-					<li>
-						<p className="nav-link px-2 link-dark">Create</p>
-					</li>
-				</ul>
-
 				<div className="col-md-3 text-end">
 					{/* <button type="button" className="btn">
 						<i className="fas fa-search h4"></i>
@@ -38,9 +26,80 @@ const Header = () => {
 					<button type="button" className="btn">
 						<i className="fas fa-shopping-cart h4"></i>
 					</button> */}
-					<button type="button" className="btn">
+					<button
+						className="btn text-decoration-none dropdown-toggle"
+						id="dropdownUser1"
+						data-bs-toggle="dropdown"
+						aria-expanded="false"
+					>
+						<i className="far fa-compass h4 "></i>
+					</button>
+					<ul
+						className="dropdown-menu text-small"
+						aria-labelledby="dropdownUser1"
+					>
+						<li>
+							<button className="dropdown-item" href="#">
+								New Auction
+							</button>
+						</li>
+						<li>
+							<button className="dropdown-item" href="#">
+								Open Auctions / Bids
+							</button>
+						</li>
+						<li>
+							<button className="dropdown-item" href="#">
+								Closed auctions / Bids
+							</button>
+						</li>
+						<li>
+							<hr className="dropdown-divider" />
+						</li>
+						<li>
+							<button className="dropdown-item" href="#">
+								Sign out
+							</button>
+						</li>
+					</ul>
+					<button
+						type="button"
+						className="btn text-decoration-none dropdown-toggle"
+						id="dropdownUser2"
+						data-bs-toggle="dropdown"
+						aria-expanded="false"
+					>
 						<i className="far fa-user h4"></i>
 					</button>
+
+					<ul
+						className="dropdown-menu text-small"
+						aria-labelledby="dropdownUser2"
+					>
+						<li>
+							<button className="dropdown-item" href="#">
+								New Auction
+							</button>
+						</li>
+						<li>
+							<button className="dropdown-item" href="#">
+								Open Auctions / Bids
+							</button>
+						</li>
+						<li>
+							<button className="dropdown-item" href="#">
+								Closed auctions / Bids
+							</button>
+						</li>
+						<li>
+							<hr className="dropdown-divider" />
+						</li>
+						<li>
+							<button className="dropdown-item" href="#">
+								Sign out
+							</button>
+						</li>
+					</ul>
 				</div>
 			</header>
 		</div>
