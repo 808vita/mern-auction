@@ -7,6 +7,8 @@ import MainPageLayout from "./layout/MainPageLayout";
 import LoginPage from "./pages/LoginPage";
 import SignupPage from "./pages/SignupPage";
 import HomePage from "./pages/HomePage";
+import CreateAuction from "./pages/CreateAuction";
+import CreateBid from "./components/CreateBidForm";
 
 // import CarAuctionsPage from "./pages/CarAuctionsPage";
 // import CarBidsPage from "./pages/CarBidsPage";
@@ -45,6 +47,9 @@ function App() {
 								// element={user ? <OwnerHomePage /> : <Navigate to="/" />}
 								element={<HomePage />}
 							/>
+
+							<Route path="/owner/create" element={<CreateAuction />} />
+							<Route path="/dealer/create" element={<CreateBid />} />
 						</Routes>
 					</div>
 				</MainPageLayout>
