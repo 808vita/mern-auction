@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { signupUser } from "../resources/LoadData";
 import { LongButton } from "./ButtonComponents";
 import { useGlobalContext } from "../hooks/useGlobalContext";
-
+import { useNavigate } from "react-router-dom";
 const SignupForm = () => {
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
@@ -10,10 +10,18 @@ const SignupForm = () => {
 	const [accountType, setAccountType] = useState("Owner");
 
 	const { setAuth, setUserInfo } = useGlobalContext();
-
+	const navigate = useNavigate();
 	const handleSubmit = async (e) => {
 		e.preventDefault();
-		await signupUser(email, password, name, accountType, setAuth, setUserInfo);
+		await signupUser(
+			email,
+			password,
+			name,
+			accountType,
+			setAuth,
+			setUserInfo,
+			navigate
+		);
 	};
 
 	return (

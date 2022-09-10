@@ -27,7 +27,7 @@ const Header = () => {
 						<i className="fas fa-shopping-cart h4"></i>
 					</button> */}
 					<button
-						className="btn text-decoration-none dropdown-toggle"
+						className="btn text-decoration-none dropdown-toggle outline-button"
 						id="dropdownUser1"
 						data-bs-toggle="dropdown"
 						aria-expanded="false"
@@ -64,7 +64,7 @@ const Header = () => {
 					</ul>
 					<button
 						type="button"
-						className="btn text-decoration-none dropdown-toggle"
+						className="btn text-decoration-none dropdown-toggle outline-button"
 						id="dropdownUser2"
 						data-bs-toggle="dropdown"
 						aria-expanded="false"

@@ -1,4 +1,10 @@
-export const loginUser = async (email, password, setAuth, setUserInfo) => {
+export const loginUser = async (
+	email,
+	password,
+	setAuth,
+	setUserInfo,
+	navigate
+) => {
 	// setLoading(true);
 
 	try {
@@ -38,7 +44,8 @@ export const signupUser = async (
 	name,
 	accountType,
 	setAuth,
-	setUserInfo
+	setUserInfo,
+	navigate
 ) => {
 	// setLoading(true);
 

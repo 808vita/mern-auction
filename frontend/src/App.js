@@ -2,9 +2,11 @@ import "./App.css";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 
 import Header from "./components/Header";
-import LoginForm from "./components/LoginForm";
-import SignupForm from "./components/SignupForm";
+
 import MainPageLayout from "./layout/MainPageLayout";
+import LoginPage from "./pages/LoginPage";
+import SignupPage from "./pages/SignupPage";
+import HomePage from "./pages/HomePage";
 
 // import CarAuctionsPage from "./pages/CarAuctionsPage";
 // import CarBidsPage from "./pages/CarBidsPage";
@@ -27,11 +29,21 @@ function App() {
 						/> */}
 							<Route
 								path="/login"
-								element={!user ? <LoginForm /> : <Navigate to="/" />}
+								element={!user ? <LoginPage /> : <Navigate to="/" />}
 							/>
 							<Route
 								path="/signup"
-								element={!user ? <SignupForm /> : <Navigate to="/" />}
+								element={!user ? <SignupPage /> : <Navigate to="/" />}
+							/>
+							<Route
+								path="/owner"
+								// element={user ? <OwnerHomePage /> : <Navigate to="/" />}
+								element={<HomePage />}
+							/>
+							<Route
+								path="/dealer"
+								// element={user ? <OwnerHomePage /> : <Navigate to="/" />}
+								element={<HomePage />}
 							/>
 						</Routes>
 					</div>
