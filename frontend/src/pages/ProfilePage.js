@@ -21,6 +21,7 @@ const ProfilePage = () => {
 					<img
 						className={`card-img-top text-center h1 pt-5`}
 						src={profilePic}
+						alt="profile"
 					></img>
 					<div className="card-body text-center">
 						<h6>Name : </h6>

@@ -5,6 +5,7 @@ const {
 	createAuction,
 	acceptBid,
 	getBids,
+	getOwnerPendingAuctions,
 } = require("../controllers/ownerControllers");
 
 const requireAuth = require("../middleware/requireAuth");
@@ -15,6 +16,7 @@ const router = express.Router();
 router.use(requireAuth);
 
 router.get("/", getAuctions);
+router.get("/pending", getOwnerPendingAuctions);
 
 router.get("/:id", getAuction);
 

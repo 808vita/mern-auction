@@ -159,3 +159,37 @@ export const createBid = async (auction_id, price, navigate) => {
 		// setLoading(false);
 	}
 };
+
+export const getOwnerPendingAuctions = async (setPendingAuctions) => {
+	// setLoading(true);
+
+	try {
+		const userInfo = JSON.parse(localStorage.getItem("user"));
+		const token = `Bearer ${userInfo.token}`;
+
+		const response = await fetch("/api/owner-auctions/pending", {
+			method: "GET",
+			headers: {
+				"Content-Type": "application/json",
+				Authorization: token,
+			},
+		});
+
+		const json = await response.json();
+
+		if (!response.ok) {
+			console.log(json.error);
+			// setLoading(false);
+		}
+
+		if (response.ok) {
+			console.log("oof", json);
+
+			// setLoading(false);
+			setPendingAuctions(json);
+		}
+	} catch (error) {
+		console.log("error", error);
+		// setLoading(false);
+	}
+};

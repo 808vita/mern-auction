@@ -18,6 +18,21 @@ const getAuctions = async (req, res) => {
 	res.status(200).json(auctions);
 };
 
+const getOwnerPendingAuctions = async (req, res) => {
+	const user_id = req.user._id;
+	const isDealer = req.isDealer.isDealer;
+	const status = "open";
+	if (isDealer === true) {
+		return res
+			.status(404)
+			.json({ error: "dealers are not allowed to use owners endpoints" });
+	}
+	const auctions = await Owner.find({ user_id, status }).sort({
+		createdAt: -1,
+	});
+	res.status(200).json(auctions);
+};
+
 //get a single auctions
 
 const getAuction = async (req, res) => {
@@ -156,4 +171,5 @@ module.exports = {
 	createAuction,
 	acceptBid,
 	getBids,
+	getOwnerPendingAuctions,
 };
