@@ -9,6 +9,8 @@ import SignupPage from "./pages/SignupPage";
 import HomePage from "./pages/HomePage";
 import CreateAuction from "./pages/CreateAuction";
 import CreateBid from "./components/CreateBidForm";
+import ProfilePage from "./pages/ProfilePage";
+import PendingAuctionsPage from "./pages/PendingAuctionsPage";
 
 // import CarAuctionsPage from "./pages/CarAuctionsPage";
 // import CarBidsPage from "./pages/CarBidsPage";
@@ -50,6 +52,22 @@ function App() {
 
 							<Route path="/owner/create" element={<CreateAuction />} />
 							<Route path="/dealer/create" element={<CreateBid />} />
+
+							<Route
+								path="/owner/profile"
+								// element={user ? <OwnerHomePage /> : <Navigate to="/" />}
+								element={<ProfilePage />}
+							/>
+							<Route
+								path="/dealer/profile"
+								// element={user ? <OwnerHomePage /> : <Navigate to="/" />}
+								element={<ProfilePage />}
+							/>
+							<Route
+								path="/owner/pending"
+								// element={user ? <OwnerHomePage /> : <Navigate to="/" />}
+								element={<PendingAuctionsPage />}
+							/>
 						</Routes>
 					</div>
 				</MainPageLayout>

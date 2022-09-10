@@ -9,9 +9,9 @@ const OwnerOptions = [
 		icon: "fas fa-plus-square",
 	},
 	{
-		title: "Open Auctions",
+		title: "Pending Auctions",
 		link: "/owner/pending",
-		info: "View your open auctions",
+		info: "View your pending auctions",
 		icon: "fas fa-clipboard-list",
 	},
 	{
