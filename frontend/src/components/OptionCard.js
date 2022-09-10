@@ -1,8 +1,11 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 const OptionCard = ({ data }) => {
+	const navigate = useNavigate();
+
 	return (
-		<div className="col-sm-6 ">
+		<div className="col-sm-6 " onClick={() => navigate(data.link)}>
 			<div className="row d-flex justify-content-center">
 				<div
 					className="card outline-button"

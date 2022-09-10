@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { LongButton } from "./ButtonComponents";
 import { useGlobalContext } from "../hooks/useGlobalContext";
-
+import { createAuction } from "../resources/LoadData";
 const CreateAuctionForm = () => {
 	const [car, setCar] = useState("");
 	const [km, setKm] = useState("");
@@ -14,6 +14,7 @@ const CreateAuctionForm = () => {
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
+		await createAuction(car, km, year, navigate);
 		// await signupUser(
 		// 	email,
 		// 	password,
