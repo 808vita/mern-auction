@@ -5,15 +5,14 @@ import { useGlobalContext } from "../hooks/useGlobalContext";
 import { useNavigate } from "react-router-dom";
 
 const LoginForm = () => {
+	const { setNotification } = useGlobalContext();
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
-
-	const { setAuth, setUserInfo } = useGlobalContext();
 
 	const navigate = useNavigate();
 	const handleSubmit = async (e) => {
 		e.preventDefault();
-		await loginUser(email, password, setAuth, setUserInfo, navigate);
+		await loginUser(email, password, navigate, setNotification);
 	};
 
 	return (

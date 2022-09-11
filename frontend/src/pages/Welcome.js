@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import OptionCard from "../components/OptionCard";
-import { useLocation } from "react-router-dom";
 
 const options = [
 	{

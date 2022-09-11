@@ -6,7 +6,7 @@ import { createBid } from "../resources/LoadData";
 const CreateBid = ({ data }) => {
 	const [price, setPrice] = useState("");
 
-	const { setAuth, setUserInfo } = useGlobalContext();
+	const { setNotification } = useGlobalContext();
 
 	const navigate = useNavigate();
 
@@ -14,7 +14,7 @@ const CreateBid = ({ data }) => {
 		e.preventDefault();
 		const auction_id = data._id;
 
-		await createBid(auction_id, price, navigate);
+		await createBid(auction_id, price, navigate, setNotification);
 	};
 
 	return (

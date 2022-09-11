@@ -9,7 +9,7 @@ const SignupForm = () => {
 	const [name, setName] = useState("");
 	const [accountType, setAccountType] = useState("Owner");
 
-	const { setAuth, setUserInfo } = useGlobalContext();
+	const { setNotification } = useGlobalContext();
 	const navigate = useNavigate();
 	const handleSubmit = async (e) => {
 		e.preventDefault();
@@ -18,9 +18,9 @@ const SignupForm = () => {
 			password,
 			name,
 			accountType,
-			setAuth,
-			setUserInfo,
-			navigate
+
+			navigate,
+			setNotification
 		);
 	};
 

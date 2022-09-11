@@ -1,12 +1,4 @@
-export const loginUser = async (
-	email,
-	password,
-	setAuth,
-	setUserInfo,
-	navigate
-) => {
-	// setLoading(true);
-
+export const loginUser = async (email, password, navigate, setNotification) => {
 	try {
 		const response = await fetch("/api/user/login", {
 			method: "POST",
@@ -20,14 +12,12 @@ export const loginUser = async (
 
 		if (!response.ok) {
 			console.log(json.error);
-			// setLoading(false);
-			setAuth(false);
+			setNotification({ msg: "Login Error " + json.error });
 		}
 
 		if (response.ok) {
 			console.log("oof", json);
-			setAuth(true);
-			setUserInfo(json);
+
 			// setLoading(false);
 			localStorage.setItem("user", JSON.stringify(json));
 
@@ -39,11 +29,13 @@ export const loginUser = async (
 			}
 
 			navigate(goto);
+
+			setNotification({ msg: "Logged in as " + json?.email });
 		}
 	} catch (error) {
 		console.log("error", error);
 		// setLoading(false);
-		setAuth(false);
+		setNotification({ msg: error });
 	}
 };
 
@@ -52,9 +44,9 @@ export const signupUser = async (
 	password,
 	name,
 	accountType,
-	setAuth,
-	setUserInfo,
-	navigate
+
+	navigate,
+	setNotification
 ) => {
 	// setLoading(true);
 
@@ -79,15 +71,12 @@ export const signupUser = async (
 
 		if (!response.ok) {
 			console.log(json.error);
-			// setLoading(false);
-			setAuth(false);
+			setNotification({ msg: "Login Error " + json.error });
 		}
 
 		if (response.ok) {
 			console.log("oof", json);
-			// setLoading(false);
-			setAuth(true);
-			setUserInfo(json);
+
 			localStorage.setItem("user", JSON.stringify(json));
 			let goto = "";
 			if (json?.isDealer) {
@@ -97,17 +86,21 @@ export const signupUser = async (
 			}
 
 			navigate(goto);
+			setNotification({ msg: "Signed up sucessfully " + json.email });
 		}
 	} catch (error) {
 		console.log("error", error);
-		// setLoading(false);
-		setAuth(false);
+		setNotification({ msg: "Signup Error " + error });
 	}
 };
 
-export const createAuction = async (car, km, year, navigate) => {
-	// setLoading(true);
-
+export const createAuction = async (
+	car,
+	km,
+	year,
+	navigate,
+	setNotification
+) => {
 	try {
 		const userInfo = JSON.parse(localStorage.getItem("user"));
 		const token = `Bearer ${userInfo.token}`;
@@ -125,25 +118,21 @@ export const createAuction = async (car, km, year, navigate) => {
 
 		if (!response.ok) {
 			console.log(json.error);
-			// setLoading(false);
+			setNotification({ msg: json.error });
 		}
 
 		if (response.ok) {
 			console.log("oof", json);
 			navigate("/owner/pending");
-			// setLoading(false);
-			//navigate
-			//navigate after success
+			setNotification({ msg: "Created new auction!" });
 		}
 	} catch (error) {
 		console.log("error", error);
-		// setLoading(false);
+		setNotification({ msg: error });
 	}
 };
 
-export const acceptBid = async (bid_id, navigate) => {
-	// setLoading(true);
-
+export const acceptBid = async (bid_id, navigate, setNotification) => {
 	try {
 		const userInfo = JSON.parse(localStorage.getItem("user"));
 		const token = `Bearer ${userInfo.token}`;
@@ -161,25 +150,29 @@ export const acceptBid = async (bid_id, navigate) => {
 
 		if (!response.ok) {
 			console.log(json.error);
-			// setLoading(false);
+			setNotification({ msg: json.error });
 		}
 
 		if (response.ok) {
 			console.log("oof", json);
 
 			// setLoading(false);
-			//navigate
+			navigate("/owner/completed");
 			//navigate after success
+			setNotification({ msg: "Bid Accepted! Auction Complete." });
 		}
 	} catch (error) {
 		console.log("error", error);
-		// setLoading(false);
+		setNotification({ msg: error });
 	}
 };
 
-export const createBid = async (auction_id, price, navigate) => {
-	// setLoading(true);
-
+export const createBid = async (
+	auction_id,
+	price,
+	navigate,
+	setNotification
+) => {
 	try {
 		const userInfo = JSON.parse(localStorage.getItem("user"));
 		const token = `Bearer ${userInfo.token}`;
@@ -197,19 +190,19 @@ export const createBid = async (auction_id, price, navigate) => {
 
 		if (!response.ok) {
 			console.log(json.error);
-			// setLoading(false);
+			setNotification({ msg: json.error });
 		}
 
 		if (response.ok) {
 			console.log("oof", json);
 
-			// setLoading(false);
+			setNotification({ msg: "Added new bid!" });
 			navigate("/dealer/pending");
 			//navigate after success
 		}
 	} catch (error) {
 		console.log("error", error);
-		// setLoading(false);
+		setNotification({ msg: error });
 	}
 };
 

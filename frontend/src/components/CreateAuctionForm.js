@@ -8,22 +8,13 @@ const CreateAuctionForm = () => {
 	const [km, setKm] = useState("");
 	const [year, setYear] = useState("");
 
-	const { setAuth, setUserInfo } = useGlobalContext();
+	const { setNotification } = useGlobalContext();
 
 	const navigate = useNavigate();
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
-		await createAuction(car, km, year, navigate);
-		// await signupUser(
-		// 	email,
-		// 	password,
-		// 	name,
-		// 	accountType,
-		// 	setAuth,
-		// 	setUserInfo,
-		// 	navigate
-		// );
+		await createAuction(car, km, year, navigate, setNotification);
 	};
 
 	return (

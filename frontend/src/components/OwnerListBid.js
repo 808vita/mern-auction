@@ -2,14 +2,16 @@ import React from "react";
 import dealerPic from "../resources/img/catDealer.jpg";
 import { useNavigate } from "react-router-dom";
 import { acceptBid } from "../resources/LoadData";
+import { useGlobalContext } from "../hooks/useGlobalContext";
 
 const OwnerListBid = ({ data }) => {
 	const navigate = useNavigate();
+	const { setNotification } = useGlobalContext();
 	const handleClick = async () => {
 		console.log("oof handle click");
 		console.log(data._id);
 		const bidId = data._id;
-		await acceptBid(bidId, navigate);
+		await acceptBid(bidId, navigate, setNotification);
 	};
 
 	return (
@@ -27,7 +29,7 @@ const OwnerListBid = ({ data }) => {
 			<div className="col-sm-6 mt-3">
 				<div className="d-flex justify-content-center ">
 					<div
-						className="card-body text-start"
+						className="card-body text-center"
 						style={{ width: "18rem", height: "14rem" }}
 					>
 						<p>Bid Price : {data.price}</p>

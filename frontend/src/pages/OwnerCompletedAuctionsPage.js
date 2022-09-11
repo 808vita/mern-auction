@@ -11,7 +11,7 @@ const OwnerCompletedAuctionsPage = () => {
 
 	return (
 		<div className="container-fluid  mb-3 ">
-			<h6 className="mb-3 text-center">Pending Auctions</h6>
+			<h6 className="mb-3 text-center">Completed Auctions</h6>
 			{completedAuctions?.map((data) => (
 				<OwnerCompletedAuctions key={data._id} data={data} />
 			))}

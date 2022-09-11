@@ -16,6 +16,7 @@ import DealerPendingBidsPage from "./pages/DealerPendingBidsPage";
 import OwnerCompletedAuctionsPage from "./pages/OwnerCompletedAuctionsPage";
 import DealerClosedBidsPage from "./pages/DealerClosedBidsPage";
 import Welcome from "./pages/Welcome";
+import Toasts from "./components/Toasts";
 
 function App() {
 	const user = JSON.parse(localStorage.getItem("user"));
@@ -61,6 +62,7 @@ function App() {
 						</Routes>
 					</div>
 				</MainPageLayout>
+				<Toasts />
 			</BrowserRouter>
 		</div>
 	);

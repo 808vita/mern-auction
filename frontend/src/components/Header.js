@@ -45,8 +45,7 @@ const DealerOptions = [
 ];
 
 const Header = () => {
-	// const { loading, setLoading, Auth, setAuth, userInfo, setUserInfo, logout } =
-	// 	useGlobalContext();
+	const { setNotification } = useGlobalContext();
 
 	const navigate = useNavigate();
 	const [navCompass, setNavCompass] = useState(null);
@@ -56,6 +55,7 @@ const Header = () => {
 	const logout = () => {
 		localStorage.removeItem("user");
 		navigate("/");
+		setNotification({ msg: "Logged Out!" });
 	};
 
 	useEffect(() => {

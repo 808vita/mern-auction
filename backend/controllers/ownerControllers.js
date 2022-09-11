@@ -164,7 +164,7 @@ const getBids = async (req, res) => {
 		return res.json(404).json({ error: "no such record" });
 	}
 
-	const auctions = await Dealer.find({ auction_id }).sort({ createdAt: -1 });
+	const auctions = await Dealer.find({ auction_id }).sort({ updatedAt: -1 });
 	// console.log(auctions);
 	if (!auctions) {
 		return res.status(404).json({ error: "no such record" });
