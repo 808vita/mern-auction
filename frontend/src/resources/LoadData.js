@@ -288,7 +288,7 @@ export const getOwnerBidsOfAcution = async (auction_id, setCheckBids) => {
 		const userInfo = JSON.parse(localStorage.getItem("user"));
 		const token = `Bearer ${userInfo.token}`;
 
-		const response = await fetch(`/api/dealer-auctions/details/${auction_id}`, {
+		const response = await fetch(`/api/owner-auctions/${auction_id}/get-bids`, {
 			method: "GET",
 			headers: {
 				"Content-Type": "application/json",

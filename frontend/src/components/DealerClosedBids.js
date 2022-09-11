@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import carPicture from "../resources/img/carImage.jpg";
-import { getOwnerBidsOfAcution } from "../resources/LoadData";
+import { auctionDeatails } from "../resources/LoadData";
 import DealerSelectedOwnerSelection from "./DealerSelectedOwnerSelection";
 
 const DealerClosedBids = ({ data }) => {
@@ -21,7 +21,7 @@ const DealerClosedBids = ({ data }) => {
 		setClicked(!clicked);
 
 		const auction_id = data.auction_id;
-		getOwnerBidsOfAcution(auction_id, setGetDetails);
+		auctionDeatails(auction_id, setGetDetails);
 	};
 	return (
 		<div className="container-fluid  mb-4 border border-primary outline-button">

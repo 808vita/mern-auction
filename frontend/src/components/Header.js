@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useGlobalContext } from "../hooks/useGlobalContext";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 
 const OwnerOptions = [
 	{
@@ -52,7 +52,7 @@ const Header = () => {
 	const [navCompass, setNavCompass] = useState(null);
 	const [profilePath, setProfilePath] = useState(null);
 	const userInfo = JSON.parse(localStorage.getItem("user"));
-
+	const path = useLocation();
 	const logout = () => {
 		localStorage.removeItem("user");
 		navigate("/");
@@ -60,6 +60,7 @@ const Header = () => {
 
 	useEffect(() => {
 		if (!userInfo) {
+			setProfilePath("/");
 			return navigate("/");
 		} else if (userInfo?.isDealer) {
 			setNavCompass(DealerOptions);
@@ -67,8 +68,21 @@ const Header = () => {
 		} else if (!userInfo?.isDealer) {
 			setNavCompass(OwnerOptions);
 			setProfilePath("/owner");
+		} else {
+			setProfilePath("/");
 		}
 	}, [userInfo]);
+
+	useEffect(() => {
+		const pathList = ["/", "/login", "/signup"];
+		const currentPath = path.pathname;
+
+		if (!pathList.includes(currentPath)) {
+			console.log("oof includes", path.pathname);
+		}
+
+		// console.log(path.pathname);
+	}, [path]);
 
 	return (
 		<div className="container-xxl">

@@ -19,7 +19,7 @@ const OptionCard = ({ data }) => {
 						<h4>{data.title}</h4>
 						<p className="card-text">{data.info}</p>
 					</div>
-				</div>{" "}
+				</div>
 			</div>
 		</div>
 	);

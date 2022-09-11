@@ -1,5 +1,5 @@
 import "./App.css";
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import Header from "./components/Header";
 
@@ -15,15 +15,11 @@ import DealerLiveAuctionsPage from "./pages/DealerLiveAuctionsPage";
 import DealerPendingBidsPage from "./pages/DealerPendingBidsPage";
 import OwnerCompletedAuctionsPage from "./pages/OwnerCompletedAuctionsPage";
 import DealerClosedBidsPage from "./pages/DealerClosedBidsPage";
-
-// import CarAuctionsPage from "./pages/CarAuctionsPage";
-// import CarBidsPage from "./pages/CarBidsPage";
-
-// import CreateAuctionForm from "./components/auctionComponents/CreateAuctionForm";
-// import CreateBidForm from "./components/bidComponents/CreateBidForm";
+import Welcome from "./pages/Welcome";
 
 function App() {
-	const user = false;
+	const user = JSON.parse(localStorage.getItem("user"));
+
 	return (
 		<div className="App">
 			<BrowserRouter>
@@ -31,81 +27,41 @@ function App() {
 				<MainPageLayout>
 					<div className="pages">
 						<Routes>
-							{/* <Route
-							path="/"
-							element={user ? <Home /> : <Navigate to="/login" />}
-						/> */}
-							<Route
-								path="/login"
-								element={!user ? <LoginPage /> : <Navigate to="/" />}
-							/>
-							<Route
-								path="/signup"
-								element={!user ? <SignupPage /> : <Navigate to="/" />}
-							/>
-							<Route
-								path="/owner"
-								// element={user ? <OwnerHomePage /> : <Navigate to="/" />}
-								element={<HomePage />}
-							/>
-							<Route
-								path="/dealer"
-								// element={user ? <OwnerHomePage /> : <Navigate to="/" />}
-								element={<HomePage />}
-							/>
+							<Route path="/" element={<Welcome />} />
+							<Route path="/login" element={<LoginPage />} />
+							<Route path="/signup" element={<SignupPage />} />
+							<Route path="/owner" element={<HomePage />} />
+							<Route path="/dealer" element={<HomePage />} />
 
 							<Route path="/owner/create" element={<CreateAuction />} />
 							<Route path="/dealer/create" element={<CreateBid />} />
 
-							<Route
-								path="/owner/profile"
-								// element={user ? <OwnerHomePage /> : <Navigate to="/" />}
-								element={<ProfilePage />}
-							/>
-							<Route
-								path="/dealer/profile"
-								// element={user ? <OwnerHomePage /> : <Navigate to="/" />}
-								element={<ProfilePage />}
-							/>
-							<Route
-								path="/owner/pending"
-								// element={user ? <OwnerHomePage /> : <Navigate to="/" />}
-								element={<PendingAuctionsPage />}
-							/>
+							<Route path="/owner/profile" element={<ProfilePage />} />
+							<Route path="/dealer/profile" element={<ProfilePage />} />
+							<Route path="/owner/pending" element={<PendingAuctionsPage />} />
 
 							<Route
 								path="dealer/auctions"
-								// element={user ? <OwnerHomePage /> : <Navigate to="/" />}
 								element={<DealerLiveAuctionsPage />}
 							/>
 
 							<Route
 								path="dealer/pending"
-								// element={user ? <OwnerHomePage /> : <Navigate to="/" />}
 								element={<DealerPendingBidsPage />}
 							/>
 
 							<Route
 								path="/owner/completed"
-								// element={user ? <OwnerHomePage /> : <Navigate to="/" />}
 								element={<OwnerCompletedAuctionsPage />}
 							/>
 							<Route
 								path="/dealer/completed"
-								// element={user ? <OwnerHomePage /> : <Navigate to="/" />}
 								element={<DealerClosedBidsPage />}
 							/>
 						</Routes>
 					</div>
 				</MainPageLayout>
 			</BrowserRouter>
-
-			{/*  */}
-			{/* */}
-			{/* <CarAuctionsPage />
-			<CarBidsPage />
-			<CreateAuctionForm />
-			<CreateBidForm /> */}
 		</div>
 	);
 }
