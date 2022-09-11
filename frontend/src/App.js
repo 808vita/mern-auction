@@ -14,6 +14,7 @@ import PendingAuctionsPage from "./pages/OwnerPendingAuctionsPage";
 import DealerLiveAuctionsPage from "./pages/DealerLiveAuctionsPage";
 import DealerPendingBidsPage from "./pages/DealerPendingBidsPage";
 import OwnerCompletedAuctionsPage from "./pages/OwnerCompletedAuctionsPage";
+import DealerClosedBidsPage from "./pages/DealerClosedBidsPage";
 
 // import CarAuctionsPage from "./pages/CarAuctionsPage";
 // import CarBidsPage from "./pages/CarBidsPage";
@@ -88,6 +89,11 @@ function App() {
 								path="/owner/completed"
 								// element={user ? <OwnerHomePage /> : <Navigate to="/" />}
 								element={<OwnerCompletedAuctionsPage />}
+							/>
+							<Route
+								path="/dealer/completed"
+								// element={user ? <OwnerHomePage /> : <Navigate to="/" />}
+								element={<DealerClosedBidsPage />}
 							/>
 						</Routes>
 					</div>

@@ -1,14 +1,14 @@
 import React from "react";
-import dealerPic from "../resources/img/catDealer.jpg";
+import ownerPic from "../resources/img/catCar.jpg";
 
-const OwnerSelectedBid = ({ data }) => {
+const DealerSelectedOwnerSelection = ({ data }) => {
 	return (
 		<div className="row  text-center pt-3 ">
 			<div className="col-sm-6 ">
 				<div className="d-flex justify-content-center">
 					<img
 						className={`card-img-top text-center rounded`}
-						src={dealerPic}
+						src={ownerPic}
 						alt="car"
 						style={{ width: "18rem", height: "14rem", objectFit: "cover" }}
 					></img>
@@ -20,11 +20,10 @@ const OwnerSelectedBid = ({ data }) => {
 						className="card-body text-center"
 						style={{ width: "18rem", height: "14rem" }}
 					>
-						<p>Dealer Name : {data.name}</p>
 						<p>Status : {data.status}</p>
-						<p>Bid Price : {data.price}</p>
-						<p>Bid Added: {data.createdAt}</p>
-						<p>Account Type : Dealer</p>
+						<p>Car Make : {data.car}</p>
+						<p>Year: {data.year}</p>
+						<p>Account Type : Owner</p>
 					</div>
 				</div>
 			</div>
@@ -32,4 +31,4 @@ const OwnerSelectedBid = ({ data }) => {
 	);
 };
 
-export default OwnerSelectedBid;
+export default DealerSelectedOwnerSelection;

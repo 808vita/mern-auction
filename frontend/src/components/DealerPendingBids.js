@@ -4,7 +4,7 @@ import carPicture from "../resources/img/carImage.jpg";
 const DealerPendingBids = ({ data }) => {
 	return (
 		<div className="container-fluid  mb-4 border border-primary outline-button">
-			<div className="row  text-center pt-3  outline-button" role="button">
+			<div className="row  text-center pt-3  outline-button">
 				<div className="col-sm-6 ">
 					<div className="d-flex justify-content-center">
 						<img
@@ -22,6 +22,7 @@ const DealerPendingBids = ({ data }) => {
 							style={{ width: "18rem", height: "15rem" }}
 						>
 							<p>Bid Price : {data.price}</p>
+							<p>Created Bid : {data.createdAt}</p>
 
 							<span>
 								status: <span className="">{data.status}</span>

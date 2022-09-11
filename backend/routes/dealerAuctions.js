@@ -5,6 +5,8 @@ const {
 	createBid,
 	getPendingBids,
 	getBid,
+	getClosedBids,
+	getOwnerDetails,
 } = require("../controllers/dealerControllers");
 const requireAuth = require("../middleware/requireAuth");
 
@@ -19,12 +21,11 @@ router.get("/bids", getBids);
 router.get("/live-auctions", getAuctions);
 router.get("/pending-bids", getPendingBids);
 
-router.get("/closed", (req, res) => {
-	res.json({ msg: "get all closed dealer auctions" });
-});
+router.get("/closed-bids", getClosedBids);
 
 router.post("/bids", createBid);
 
 router.get("/:id", getBid);
+router.get("/details/:id", getOwnerDetails);
 
 module.exports = router;

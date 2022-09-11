@@ -1,20 +1,27 @@
 import React, { useState } from "react";
 import carPicture from "../resources/img/carImage.jpg";
 import { getOwnerBidsOfAcution } from "../resources/LoadData";
-import OwnerListBid from "./OwnerListBid";
+import DealerSelectedOwnerSelection from "./DealerSelectedOwnerSelection";
 
-const OwnerPendingAuctions = ({ data }) => {
+const DealerClosedBids = ({ data }) => {
 	const [clicked, setClicked] = useState(false);
 
-	const [checkBids, setCheckBids] = useState([]);
+	const [getDetails, setGetDetails] = useState(null);
+
+	let completedBid;
+	if (data?.status == "selected") {
+		completedBid = true;
+	} else if (data?.status !== "selected") {
+		completedBid = false;
+	}
 
 	// /:auction_id/get-bids
 
 	const handleClick = () => {
 		setClicked(!clicked);
 
-		const auction_id = data._id;
-		getOwnerBidsOfAcution(auction_id, setCheckBids);
+		const auction_id = data.auction_id;
+		getOwnerBidsOfAcution(auction_id, setGetDetails);
 	};
 	return (
 		<div className="container-fluid  mb-4 border border-primary outline-button">
@@ -39,32 +46,38 @@ const OwnerPendingAuctions = ({ data }) => {
 							className="card-body text-center"
 							style={{ width: "18rem", height: "15rem", objectFit: "cover" }}
 						>
-							<p>car : {data.car}</p>
-							<p>km : {data.km}</p>
-							<p>year : {data.year}</p>
+							<p>Bid Price: {data.price}</p>
+							<p>Added Bid : {data.createdAt}</p>
+
 							<p>status: {data.status}</p>
 							<span
-								className={clicked ? `fa fa-arrow-down` : `fa fa-arrow-right`}
+								className={
+									completedBid
+										? clicked
+											? `fa fa-arrow-down`
+											: completedBid && `fa fa-arrow-right`
+										: ""
+								}
 							>
-								{clicked ? `Bids` : `Check Bids`}
+								{completedBid && clicked ? `Info` : completedBid && `Deal Info`}
 							</span>
 						</div>
 					</div>
 				</div>
 			</div>
 
-			{clicked && checkBids.length > 0 ? (
+			{completedBid && clicked && getDetails ? (
 				<>
-					<h6 className="text-center">There Are {checkBids.length} Bids! </h6>
+					<h6 className="text-center">Deal Details!</h6>
 					<hr />
-					{checkBids?.map((data) => (
-						<OwnerListBid key={data._id} data={data} />
-					))}
+
+					<DealerSelectedOwnerSelection data={getDetails} />
 				</>
 			) : (
+				completedBid &&
 				clicked && (
 					<>
-						<h6 className="text-center">There Are No Bids! </h6>
+						<h6 className="text-center">Loading Info </h6>
 						<hr />
 					</>
 				)
@@ -73,4 +86,4 @@ const OwnerPendingAuctions = ({ data }) => {
 	);
 };
 
-export default OwnerPendingAuctions;
+export default DealerClosedBids;

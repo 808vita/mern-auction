@@ -288,7 +288,7 @@ export const getOwnerBidsOfAcution = async (auction_id, setCheckBids) => {
 		const userInfo = JSON.parse(localStorage.getItem("user"));
 		const token = `Bearer ${userInfo.token}`;
 
-		const response = await fetch(`/api/owner-auctions/${auction_id}/get-bids`, {
+		const response = await fetch(`/api/dealer-auctions/details/${auction_id}`, {
 			method: "GET",
 			headers: {
 				"Content-Type": "application/json",
@@ -383,6 +383,40 @@ export const getDealerPendingBids = async (setPendingAuctions) => {
 	}
 };
 
+export const getDealerClosedBids = async (setClosedAuctions) => {
+	// setLoading(true);
+
+	try {
+		const userInfo = JSON.parse(localStorage.getItem("user"));
+		const token = `Bearer ${userInfo.token}`;
+
+		const response = await fetch("/api/dealer-auctions/closed-bids", {
+			method: "GET",
+			headers: {
+				"Content-Type": "application/json",
+				Authorization: token,
+			},
+		});
+
+		const json = await response.json();
+
+		if (!response.ok) {
+			console.log(json.error);
+			// setLoading(false);
+		}
+
+		if (response.ok) {
+			console.log("oof", json);
+
+			// setLoading(false);
+			setClosedAuctions(json);
+		}
+	} catch (error) {
+		console.log("error", error);
+		// setLoading(false);
+	}
+};
+
 export const checkBid = async (bidId, setCheckBid) => {
 	// setLoading(true);
 
@@ -391,6 +425,40 @@ export const checkBid = async (bidId, setCheckBid) => {
 		const token = `Bearer ${userInfo.token}`;
 
 		const response = await fetch(`/api/dealer-auctions/${bidId}`, {
+			method: "GET",
+			headers: {
+				"Content-Type": "application/json",
+				Authorization: token,
+			},
+		});
+
+		const json = await response.json();
+
+		if (!response.ok) {
+			console.log(json.error);
+			// setLoading(false);
+		}
+
+		if (response.ok) {
+			console.log("oof", json);
+
+			// setLoading(false);
+			setCheckBid(json);
+		}
+	} catch (error) {
+		console.log("error", error);
+		// setLoading(false);
+	}
+};
+
+export const auctionDeatails = async (auction_id, setCheckBid) => {
+	// setLoading(true);
+
+	try {
+		const userInfo = JSON.parse(localStorage.getItem("user"));
+		const token = `Bearer ${userInfo.token}`;
+
+		const response = await fetch(`/api/dealer-auctions/details/${auction_id}`, {
 			method: "GET",
 			headers: {
 				"Content-Type": "application/json",

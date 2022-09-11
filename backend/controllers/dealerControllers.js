@@ -26,6 +26,20 @@ const getBid = async (req, res) => {
 	res.status(200).json(bid);
 };
 
+const getOwnerDetails = async (req, res) => {
+	const { id } = req.params;
+	if (!mongoose.Types.ObjectId.isValid(id)) {
+		return res.status(404).json({ error: "no such record" });
+	}
+	const details = await Owner.findById(id);
+
+	if (!details) {
+		return res.status(404).json({ error: "no such record" });
+	}
+
+	res.status(200).json(details);
+};
+
 //get all bids
 //need show only user created bids - right now shows every bid record
 
@@ -53,6 +67,23 @@ const getPendingBids = async (req, res) => {
 	const auctions = await Dealer.find({ user_id, status }).sort({
 		createdAt: -1,
 	});
+	res.status(200).json(auctions);
+};
+
+const getClosedBids = async (req, res) => {
+	const user_id = req.user._id;
+	const isDealer = req.isDealer.isDealer;
+	const status = "open";
+	if (isDealer === false) {
+		return res
+			.status(404)
+			.json({ error: "owners are not allowed to use dealers endpoints" });
+	}
+	const auctions = await Dealer.find({ user_id, status: { $ne: status } }).sort(
+		{
+			createdAt: -1,
+		}
+	);
 	res.status(200).json(auctions);
 };
 
@@ -108,4 +139,6 @@ module.exports = {
 	createBid,
 	getPendingBids,
 	getBid,
+	getClosedBids,
+	getOwnerDetails,
 };

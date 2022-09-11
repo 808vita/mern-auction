@@ -34,7 +34,7 @@ const DealerLiveAuctions = ({ data }) => {
 				<div className="col-sm-6 mt-3">
 					<div className="d-flex justify-content-center ">
 						<div
-							className="card-body text-start"
+							className="card-body text-center"
 							style={{ width: "18rem", height: "15rem" }}
 						>
 							<p>car : {data.car}</p>
