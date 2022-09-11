@@ -3,6 +3,7 @@ const {
 	getAuctions,
 	getBids,
 	createBid,
+	getPendingBids,
 } = require("../controllers/dealerControllers");
 const requireAuth = require("../middleware/requireAuth");
 
@@ -14,9 +15,8 @@ router.use(requireAuth);
 router.get("/", getAuctions);
 router.get("/bids", getBids);
 
-router.get("/pending", (req, res) => {
-	res.json({ msg: "get all pending dealer auctions" });
-});
+router.get("/live-auctions", getAuctions);
+router.get("/pending-bids", getPendingBids);
 
 router.get("/closed", (req, res) => {
 	res.json({ msg: "get all closed dealer auctions" });

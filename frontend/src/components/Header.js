@@ -3,15 +3,17 @@ import { useGlobalContext } from "../hooks/useGlobalContext";
 import { useNavigate } from "react-router-dom";
 
 const Header = () => {
-	const { loading, setLoading, Auth, setAuth, userInfo, setUserInfo, logout } =
-		useGlobalContext();
+	// const { loading, setLoading, Auth, setAuth, userInfo, setUserInfo, logout } =
+	// 	useGlobalContext();
 
+	const navigate = useNavigate();
 	return (
 		<div className="container-xxl">
 			<header className="d-flex flex-wrap align-items-center justify-content-around justify-content-md-around py-3 mb-3 border-bottom">
-				<a
+				<span
 					className="d-flex align-items-center col-md-3 mb-2 mb-md-0 text-dark text-decoration-none"
-					href="https://github.com/808vita?tab=repositories"
+					// href="https://github.com/808vita?tab=repositories"
+					onClick={() => navigate("/home")}
 				>
 					<img
 						src="https://avatars.githubusercontent.com/u/97225946?v=4"
@@ -22,7 +24,7 @@ const Header = () => {
 					<h4>
 						<span className="logo-e">E</span>-Shop
 					</h4>
-				</a>
+				</span>
 
 				<div className="col-md-3 text-end">
 					{/* <button type="button" className="btn">

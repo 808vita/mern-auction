@@ -1,7 +1,7 @@
 import React from "react";
 import carPicture from "../resources/img/carImage.jpg";
 
-const OwnerPendingAuctions = ({ data }) => {
+const DealerPendingBids = ({ data }) => {
 	return (
 		<div className="container-fluid  mb-4 border border-primary outline-button">
 			<div className="row  text-center pt-3  outline-button" role="button">
@@ -21,11 +21,9 @@ const OwnerPendingAuctions = ({ data }) => {
 							className="card-body text-center"
 							style={{ width: "18rem", height: "15rem" }}
 						>
-							<p>car : {data.car}</p>
-							<p>km : {data.km}</p>
-							<p>year : {data.year}</p>
+							<p>Bid Price : {data.price}</p>
+
 							<p>status: {data.status}</p>
-							<span className="fa fa-arrow-right">Check Bids</span>
 						</div>
 					</div>
 				</div>
@@ -34,4 +32,4 @@ const OwnerPendingAuctions = ({ data }) => {
 	);
 };
 
-export default OwnerPendingAuctions;
+export default DealerPendingBids;

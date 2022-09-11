@@ -27,6 +27,21 @@ const getBids = async (req, res) => {
 	res.status(200).json(auctions);
 };
 
+const getPendingBids = async (req, res) => {
+	const user_id = req.user._id;
+	const isDealer = req.isDealer.isDealer;
+	const status = "open";
+	if (isDealer === false) {
+		return res
+			.status(404)
+			.json({ error: "owners are not allowed to use dealers endpoints" });
+	}
+	const auctions = await Dealer.find({ user_id, status }).sort({
+		createdAt: -1,
+	});
+	res.status(200).json(auctions);
+};
+
 //create new bid
 //news validations -> come back to this after frontend
 //need checks for auction id
@@ -70,4 +85,5 @@ module.exports = {
 	getAuctions,
 	getBids,
 	createBid,
+	getPendingBids,
 };
