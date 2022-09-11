@@ -5,10 +5,19 @@ import dealerPic from "../resources/img/catDealer.jpg";
 
 const ProfilePage = () => {
 	const [profilePic, setProfilePic] = useState(null);
-
+	const userInfo = JSON.parse(localStorage.getItem("user"));
+	const [accountType, setAccountType] = useState("");
 	useEffect(() => {
-		setProfilePic(dealerPic);
-	}, []);
+		if (!userInfo) {
+			return;
+		} else if (userInfo.isDealer) {
+			setAccountType("Dealer");
+			setProfilePic(dealerPic);
+		} else if (!userInfo.isDealer) {
+			setAccountType("Owner");
+			setProfilePic(ownerPic);
+		}
+	}, [userInfo]);
 
 	return (
 		<div className="col-sm-12 ">
@@ -23,10 +32,10 @@ const ProfilePage = () => {
 						src={profilePic}
 						alt="profile"
 					></img>
-					<div className="card-body text-center">
-						<h6>Name : </h6>
-						<p className="card-text">Account Type:</p>
-						<p className="card-text">Registered Email:</p>
+					<div className="card-body text-start">
+						<p>Name : {userInfo?.name} </p>
+						<p className="card-text">Account Type : {accountType}</p>
+						<p className="card-text">Registered Email : {userInfo?.email}</p>
 					</div>
 				</div>
 			</div>

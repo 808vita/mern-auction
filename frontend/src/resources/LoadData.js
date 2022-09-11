@@ -30,6 +30,15 @@ export const loginUser = async (
 			setUserInfo(json);
 			// setLoading(false);
 			localStorage.setItem("user", JSON.stringify(json));
+
+			let goto = "";
+			if (json?.isDealer) {
+				goto = "/dealer";
+			} else if (!json?.isDealer) {
+				goto = "/owner";
+			}
+
+			navigate(goto);
 		}
 	} catch (error) {
 		console.log("error", error);
@@ -80,6 +89,14 @@ export const signupUser = async (
 			setAuth(true);
 			setUserInfo(json);
 			localStorage.setItem("user", JSON.stringify(json));
+			let goto = "";
+			if (json?.isDealer) {
+				goto = "/dealer";
+			} else if (!json?.isDealer) {
+				goto = "/owner";
+			}
+
+			navigate(goto);
 		}
 	} catch (error) {
 		console.log("error", error);

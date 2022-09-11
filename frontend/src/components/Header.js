@@ -1,19 +1,77 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useGlobalContext } from "../hooks/useGlobalContext";
 import { useNavigate } from "react-router-dom";
+
+const OwnerOptions = [
+	{
+		title: "Create Auction",
+		link: "/owner/create",
+	},
+	{
+		title: "Pending Auctions",
+		link: "/owner/pending",
+	},
+	{
+		title: "Closed Auctions",
+		link: "/owner/completed",
+	},
+	// {
+	// 	title: "Profile",
+	// 	link: "/owner/profile",
+	// 	info: "View logged in account details",
+	// 	icon: "fas fa-address-card",
+	// },
+];
+
+const DealerOptions = [
+	{
+		title: "Live Auctions",
+		link: "/dealer/auctions",
+	},
+	{
+		title: "Pending Bids",
+		link: "/dealer/pending",
+	},
+	{
+		title: "Closed Bids",
+		link: "/dealer/completed",
+	},
+	// {
+	// 	title: "Profile",
+	// 	link: "/dealer/profile",
+	// 	info: "View logged in account details",
+	// 	icon: "fas fa-address-card",
+	// },
+];
 
 const Header = () => {
 	// const { loading, setLoading, Auth, setAuth, userInfo, setUserInfo, logout } =
 	// 	useGlobalContext();
 
 	const navigate = useNavigate();
+	const [navCompass, setNavCompass] = useState(null);
+	const [profilePath, setProfilePath] = useState(null);
+	const userInfo = JSON.parse(localStorage.getItem("user"));
+
+	useEffect(() => {
+		if (!userInfo) {
+			return navigate("/");
+		} else if (userInfo?.isDealer) {
+			setNavCompass(DealerOptions);
+			setProfilePath("/dealer");
+		} else if (!userInfo?.isDealer) {
+			setNavCompass(OwnerOptions);
+			setProfilePath("/owner");
+		}
+	}, []);
+
 	return (
 		<div className="container-xxl">
 			<header className="d-flex flex-wrap align-items-center justify-content-around justify-content-md-around py-3 mb-3 border-bottom">
 				<span
 					className="d-flex align-items-center col-md-3 mb-2 mb-md-0 text-dark text-decoration-none"
 					// href="https://github.com/808vita?tab=repositories"
-					onClick={() => navigate("/home")}
+					onClick={() => navigate(profilePath)}
 				>
 					<img
 						src="https://avatars.githubusercontent.com/u/97225946?v=4"
@@ -45,29 +103,19 @@ const Header = () => {
 						className="dropdown-menu text-small"
 						aria-labelledby="dropdownUser1"
 					>
-						<li>
-							<button className="dropdown-item" href="#">
-								New Auction
-							</button>
-						</li>
-						<li>
-							<button className="dropdown-item" href="#">
-								Open Auctions / Bids
-							</button>
-						</li>
-						<li>
-							<button className="dropdown-item" href="#">
-								Closed auctions / Bids
-							</button>
-						</li>
-						<li>
-							<hr className="dropdown-divider" />
-						</li>
-						<li>
-							<button className="dropdown-item" href="#">
-								Sign out
-							</button>
-						</li>
+						{userInfo &&
+							navCompass?.map((data) => (
+								<li key={data.title}>
+									<button
+										className="dropdown-item"
+										onClick={() => {
+											navigate(data.link);
+										}}
+									>
+										{data.title}
+									</button>
+								</li>
+							))}
 					</ul>
 					<button
 						type="button"
@@ -84,26 +132,16 @@ const Header = () => {
 						aria-labelledby="dropdownUser2"
 					>
 						<li>
-							<button className="dropdown-item" href="#">
-								New Auction
+							<button
+								className="dropdown-item"
+								onClick={() => navigate(profilePath + "/profile")}
+							>
+								Profile
 							</button>
 						</li>
 						<li>
 							<button className="dropdown-item" href="#">
-								Open Auctions / Bids
-							</button>
-						</li>
-						<li>
-							<button className="dropdown-item" href="#">
-								Closed auctions / Bids
-							</button>
-						</li>
-						<li>
-							<hr className="dropdown-divider" />
-						</li>
-						<li>
-							<button className="dropdown-item" href="#">
-								Sign out
+								Log Out
 							</button>
 						</li>
 					</ul>

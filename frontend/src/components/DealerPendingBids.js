@@ -23,7 +23,9 @@ const DealerPendingBids = ({ data }) => {
 						>
 							<p>Bid Price : {data.price}</p>
 
-							<p>status: {data.status}</p>
+							<span>
+								status: <span className="">{data.status}</span>
+							</span>
 						</div>
 					</div>
 				</div>
