@@ -130,7 +130,7 @@ export const createAuction = async (car, km, year, navigate) => {
 
 		if (response.ok) {
 			console.log("oof", json);
-
+			navigate("/owner/pending");
 			// setLoading(false);
 			//navigate
 			//navigate after success
@@ -204,7 +204,7 @@ export const createBid = async (auction_id, price, navigate) => {
 			console.log("oof", json);
 
 			// setLoading(false);
-			//navigate
+			navigate("/dealer/pending");
 			//navigate after success
 		}
 	} catch (error) {
@@ -376,6 +376,40 @@ export const getDealerPendingBids = async (setPendingAuctions) => {
 
 			// setLoading(false);
 			setPendingAuctions(json);
+		}
+	} catch (error) {
+		console.log("error", error);
+		// setLoading(false);
+	}
+};
+
+export const checkBid = async (bidId, setCheckBid) => {
+	// setLoading(true);
+
+	try {
+		const userInfo = JSON.parse(localStorage.getItem("user"));
+		const token = `Bearer ${userInfo.token}`;
+
+		const response = await fetch(`/api/dealer-auctions/${bidId}`, {
+			method: "GET",
+			headers: {
+				"Content-Type": "application/json",
+				Authorization: token,
+			},
+		});
+
+		const json = await response.json();
+
+		if (!response.ok) {
+			console.log(json.error);
+			// setLoading(false);
+		}
+
+		if (response.ok) {
+			console.log("oof", json);
+
+			// setLoading(false);
+			setCheckBid(json);
 		}
 	} catch (error) {
 		console.log("error", error);

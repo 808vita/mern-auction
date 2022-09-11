@@ -4,6 +4,7 @@ const {
 	getBids,
 	createBid,
 	getPendingBids,
+	getBid,
 } = require("../controllers/dealerControllers");
 const requireAuth = require("../middleware/requireAuth");
 
@@ -23,5 +24,7 @@ router.get("/closed", (req, res) => {
 });
 
 router.post("/bids", createBid);
+
+router.get("/:id", getBid);
 
 module.exports = router;

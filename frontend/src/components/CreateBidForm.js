@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { LongButton } from "./ButtonComponents";
 import { useGlobalContext } from "../hooks/useGlobalContext";
 import { createBid } from "../resources/LoadData";
-const CreateBid = () => {
+const CreateBid = ({ data }) => {
 	const [price, setPrice] = useState("");
 
 	const { setAuth, setUserInfo } = useGlobalContext();
@@ -12,15 +12,14 @@ const CreateBid = () => {
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
+		const auction_id = data._id;
 
-		// await createBid(
-		//     auction_id,price,navigate
-		// )
+		await createBid(auction_id, price, navigate);
 	};
 
 	return (
 		<>
-			<div className="container-fluid center-form">
+			<div className="container-fluid center-form mb-3 ">
 				<h6 className="mb-3 text-center">Add Bid</h6>
 				<form className="signup" onSubmit={handleSubmit}>
 					<div className="row g-3">
@@ -36,7 +35,7 @@ const CreateBid = () => {
 							></input>
 						</div>
 
-						<LongButton text={"Add Bid"} type={"submit"} color={"green"} />
+						<LongButton text={"Add Bid"} type={"submit"} color={"outline"} />
 					</div>
 				</form>
 			</div>

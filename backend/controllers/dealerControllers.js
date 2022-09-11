@@ -12,6 +12,20 @@ const getAuctions = async (req, res) => {
 	res.status(200).json(auctions);
 };
 
+const getBid = async (req, res) => {
+	const { id } = req.params;
+	if (!mongoose.Types.ObjectId.isValid(id)) {
+		return res.status(404).json({ error: "no such record" });
+	}
+	const bid = await Dealer.findOne({ auction_id: id });
+
+	if (!bid) {
+		return res.status(404).json({ error: "no such record" });
+	}
+
+	res.status(200).json(bid);
+};
+
 //get all bids
 //need show only user created bids - right now shows every bid record
 
@@ -93,4 +107,5 @@ module.exports = {
 	getBids,
 	createBid,
 	getPendingBids,
+	getBid,
 };
