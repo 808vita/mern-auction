@@ -63,7 +63,7 @@ const Header = () => {
 			setNavCompass(OwnerOptions);
 			setProfilePath("/owner");
 		}
-	}, []);
+	}, [userInfo]);
 
 	return (
 		<div className="container-xxl">
@@ -131,19 +131,42 @@ const Header = () => {
 						className="dropdown-menu text-small"
 						aria-labelledby="dropdownUser2"
 					>
-						<li>
-							<button
-								className="dropdown-item"
-								onClick={() => navigate(profilePath + "/profile")}
-							>
-								Profile
-							</button>
-						</li>
-						<li>
-							<button className="dropdown-item" href="#">
-								Log Out
-							</button>
-						</li>
+						{userInfo ? (
+							<>
+								<li>
+									<button
+										className="dropdown-item"
+										onClick={() => navigate(profilePath + "/profile")}
+									>
+										Profile
+									</button>
+								</li>
+								<li>
+									<button className="dropdown-item" href="#">
+										Log Out
+									</button>
+								</li>
+							</>
+						) : (
+							<>
+								<li>
+									<button
+										className="dropdown-item"
+										onClick={() => navigate("/login")}
+									>
+										Login
+									</button>
+								</li>
+								<li>
+									<button
+										className="dropdown-item"
+										onClick={() => navigate("/signup")}
+									>
+										Signup
+									</button>
+								</li>
+							</>
+						)}
 					</ul>
 				</div>
 			</header>

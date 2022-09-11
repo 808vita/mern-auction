@@ -33,6 +33,21 @@ const getOwnerPendingAuctions = async (req, res) => {
 	res.status(200).json(auctions);
 };
 
+const getOwnerCompletedAuctions = async (req, res) => {
+	const user_id = req.user._id;
+	const isDealer = req.isDealer.isDealer;
+	const status = "completed";
+	if (isDealer === true) {
+		return res
+			.status(404)
+			.json({ error: "dealers are not allowed to use owners endpoints" });
+	}
+	const auctions = await Owner.find({ user_id, status }).sort({
+		createdAt: -1,
+	});
+	res.status(200).json(auctions);
+};
+
 //get a single auctions
 
 const getAuction = async (req, res) => {
@@ -99,29 +114,21 @@ const acceptBid = async (req, res) => {
 		auction_id,
 		status: "rejected",
 	});
-	let SelectedBid = await Dealer.findOneAndUpdate({
-		_id: bidId,
+	let SelectedBid = await Dealer.findByIdAndUpdate(bidId, {
 		status: "selected",
 	});
-	SelectedBid = await Dealer.findOne({
-		_id: bidId,
-	});
+	SelectedBid = await Dealer.findById(bidId);
 	// console.log(SelectedBid);
 
 	const { user_id: selectedDealer } = SelectedBid;
-	let completeAuction = await Owner.findOneAndUpdate({
-		_id: auction_id.auction_id,
+	let completeAuction = await Owner.findByIdAndUpdate(auction_id, {
 		status: "completed",
 		selectedDealer: selectedDealer,
 	});
 
-	completeAuction = await Owner.findOne({
-		_id: completeAuction._id,
-	});
+	// completeAuction = await Owner.findById(completeAuction._id);
 
-	let dealerDetails = await User.findOne({
-		_id: selectedDealer,
-	});
+	let dealerDetails = await User.findById(selectedDealer);
 
 	// this could be threat all details can be modified
 	//create status key:value in model
@@ -151,6 +158,7 @@ const getBids = async (req, res) => {
 	const { auction_id } = req.params;
 	const user_id = req.user._id;
 	const isDealer = req.isDealer.isDealer;
+	const status = "open";
 
 	if (!mongoose.Types.ObjectId.isValid(auction_id)) {
 		return res.json(404).json({ error: "no such record" });
@@ -172,4 +180,5 @@ module.exports = {
 	acceptBid,
 	getBids,
 	getOwnerPendingAuctions,
+	getOwnerCompletedAuctions,
 };

@@ -2,8 +2,9 @@ import React, { useState } from "react";
 import carPicture from "../resources/img/carImage.jpg";
 import { getOwnerBidsOfAcution } from "../resources/LoadData";
 import OwnerListBid from "./OwnerListBid";
+import OwnerSelectedBid from "./OwnerSelectedBid";
 
-const OwnerPendingAuctions = ({ data }) => {
+const OwnerCompletedAuctions = ({ data }) => {
 	const [clicked, setClicked] = useState(false);
 
 	const [checkBids, setCheckBids] = useState([]);
@@ -46,7 +47,7 @@ const OwnerPendingAuctions = ({ data }) => {
 							<span
 								className={clicked ? `fa fa-arrow-down` : `fa fa-arrow-right`}
 							>
-								{clicked ? `Bids` : `Check Bids`}
+								{clicked ? `Info` : `Dealer Info`}
 							</span>
 						</div>
 					</div>
@@ -55,16 +56,16 @@ const OwnerPendingAuctions = ({ data }) => {
 
 			{clicked && checkBids.length > 0 ? (
 				<>
-					<h6 className="text-center">There Are {checkBids.length} Bids! </h6>
+					<h6 className="text-center">Deal Details!</h6>
 					<hr />
 					{checkBids?.map((data) => (
-						<OwnerListBid key={data._id} data={data} />
+						<OwnerSelectedBid key={data._id} data={data} />
 					))}
 				</>
 			) : (
 				clicked && (
 					<>
-						<h6 className="text-center">There Are No Bids! </h6>
+						<h6 className="text-center">Loading Info </h6>
 						<hr />
 					</>
 				)
@@ -73,4 +74,4 @@ const OwnerPendingAuctions = ({ data }) => {
 	);
 };
 
-export default OwnerPendingAuctions;
+export default OwnerCompletedAuctions;

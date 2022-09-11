@@ -6,6 +6,7 @@ const {
 	acceptBid,
 	getBids,
 	getOwnerPendingAuctions,
+	getOwnerCompletedAuctions,
 } = require("../controllers/ownerControllers");
 
 const requireAuth = require("../middleware/requireAuth");
@@ -17,21 +18,13 @@ router.use(requireAuth);
 
 router.get("/", getAuctions);
 router.get("/pending", getOwnerPendingAuctions);
-
-router.get("/:id", getAuction);
+router.get("/completed", getOwnerCompletedAuctions);
 
 router.get("/:auction_id/get-bids", getBids);
-
-router.get("/pending", (req, res) => {
-	res.json({ msg: "get all pending owner-auctions" });
-});
-
-router.get("/closed", (req, res) => {
-	res.json({ msg: "get all closed owner-auctions" });
-});
 
 router.post("/", createAuction);
 
 router.patch("/accept-bid/:bidId", acceptBid);
 
+router.get("/:id", getAuction);
 module.exports = router;

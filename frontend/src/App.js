@@ -10,9 +10,10 @@ import HomePage from "./pages/HomePage";
 import CreateAuction from "./pages/CreateAuction";
 import CreateBid from "./components/CreateBidForm";
 import ProfilePage from "./pages/ProfilePage";
-import PendingAuctionsPage from "./pages/PendingAuctionsPage";
+import PendingAuctionsPage from "./pages/OwnerPendingAuctionsPage";
 import DealerLiveAuctionsPage from "./pages/DealerLiveAuctionsPage";
 import DealerPendingBidsPage from "./pages/DealerPendingBidsPage";
+import OwnerCompletedAuctionsPage from "./pages/OwnerCompletedAuctionsPage";
 
 // import CarAuctionsPage from "./pages/CarAuctionsPage";
 // import CarBidsPage from "./pages/CarBidsPage";
@@ -81,6 +82,12 @@ function App() {
 								path="dealer/pending"
 								// element={user ? <OwnerHomePage /> : <Navigate to="/" />}
 								element={<DealerPendingBidsPage />}
+							/>
+
+							<Route
+								path="/owner/completed"
+								// element={user ? <OwnerHomePage /> : <Navigate to="/" />}
+								element={<OwnerCompletedAuctionsPage />}
 							/>
 						</Routes>
 					</div>

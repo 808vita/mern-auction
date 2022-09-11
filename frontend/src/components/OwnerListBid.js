@@ -1,0 +1,50 @@
+import React from "react";
+import dealerPic from "../resources/img/catDealer.jpg";
+import { useNavigate } from "react-router-dom";
+import { acceptBid } from "../resources/LoadData";
+
+const OwnerListBid = ({ data }) => {
+	const navigate = useNavigate();
+	const handleClick = async () => {
+		console.log("oof handle click");
+		console.log(data._id);
+		const bidId = data._id;
+		await acceptBid(bidId, navigate);
+	};
+
+	return (
+		<div className="row  text-center pt-3 ">
+			<div className="col-sm-6 ">
+				<div className="d-flex justify-content-center">
+					<img
+						className={`card-img-top text-center rounded`}
+						src={dealerPic}
+						alt="car"
+						style={{ width: "18rem", height: "14rem", objectFit: "cover" }}
+					></img>
+				</div>
+			</div>
+			<div className="col-sm-6 mt-3">
+				<div className="d-flex justify-content-center ">
+					<div
+						className="card-body text-start"
+						style={{ width: "18rem", height: "14rem" }}
+					>
+						<p>Bid Price : {data.price}</p>
+						<p>Bid Added: {data.createdAt}</p>
+						<p>Account Type : Dealer</p>
+
+						<button
+							className="btn rounded-button outline-button-long"
+							onClick={handleClick}
+						>
+							Accept Bid
+						</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	);
+};
+
+export default OwnerListBid;

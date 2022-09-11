@@ -50,6 +50,7 @@ const createBid = async (req, res) => {
 	const { auction_id, price } = req.body;
 	const user_id = req.user._id;
 	const isDealer = req.isDealer.isDealer;
+	const name = req.name.name;
 	const status = "open";
 
 	if (isDealer === false) {
@@ -74,7 +75,13 @@ const createBid = async (req, res) => {
 	}
 
 	try {
-		const bid = await Dealer.create({ auction_id, price, user_id, status });
+		const bid = await Dealer.create({
+			auction_id,
+			price,
+			user_id,
+			status,
+			name,
+		});
 		res.status(200).json(bid);
 	} catch (error) {
 		res.status(400).json({ error: error.message });
