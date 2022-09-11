@@ -11,10 +11,14 @@ const DealerPendingBidsPage = () => {
 
 	return (
 		<div className="container-fluid  mb-3 ">
-			<h6 className="mb-3 text-center">Live Auctions</h6>
-			{pendingAuctions?.map((data) => (
-				<DealerPendingBids key={data._id} data={data} />
-			))}
+			<h6 className="mb-3 text-center">Pending Bids</h6>
+			{pendingAuctions?.length > 0 ? (
+				pendingAuctions?.map((data) => (
+					<DealerPendingBids key={data._id} data={data} />
+				))
+			) : (
+				<h6 className="text-center">No Bids. Create Bids first!</h6>
+			)}
 		</div>
 	);
 };

@@ -13,11 +13,12 @@ const getAuctions = async (req, res) => {
 };
 
 const getBid = async (req, res) => {
+	const user_id = req.user._id;
 	const { id } = req.params;
 	if (!mongoose.Types.ObjectId.isValid(id)) {
 		return res.status(404).json({ error: "no such record" });
 	}
-	const bid = await Dealer.findOne({ auction_id: id });
+	const bid = await Dealer.findOne({ auction_id: id, user_id });
 
 	if (!bid) {
 		return res.status(404).json({ error: "no such record" });

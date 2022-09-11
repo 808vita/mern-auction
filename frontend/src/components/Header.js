@@ -53,6 +53,11 @@ const Header = () => {
 	const [profilePath, setProfilePath] = useState(null);
 	const userInfo = JSON.parse(localStorage.getItem("user"));
 
+	const logout = () => {
+		localStorage.removeItem("user");
+		navigate("/");
+	};
+
 	useEffect(() => {
 		if (!userInfo) {
 			return navigate("/");
@@ -91,31 +96,32 @@ const Header = () => {
 					<button type="button" className="btn">
 						<i className="fas fa-shopping-cart h4"></i>
 					</button> */}
-					<button
-						className="btn text-decoration-none dropdown-toggle outline-button"
-						id="dropdownUser1"
-						data-bs-toggle="dropdown"
-						aria-expanded="false"
-					>
-						<i className="far fa-compass h4 "></i>
-					</button>
+					{userInfo && (
+						<button
+							className="btn text-decoration-none dropdown-toggle outline-button"
+							id="dropdownUser1"
+							data-bs-toggle="dropdown"
+							aria-expanded="false"
+						>
+							<i className="far fa-compass h4 "></i>
+						</button>
+					)}
 					<ul
 						className="dropdown-menu text-small"
 						aria-labelledby="dropdownUser1"
 					>
-						{userInfo &&
-							navCompass?.map((data) => (
-								<li key={data.title}>
-									<button
-										className="dropdown-item"
-										onClick={() => {
-											navigate(data.link);
-										}}
-									>
-										{data.title}
-									</button>
-								</li>
-							))}
+						{navCompass?.map((data) => (
+							<li key={data.title}>
+								<button
+									className="dropdown-item"
+									onClick={() => {
+										navigate(data.link);
+									}}
+								>
+									{data.title}
+								</button>
+							</li>
+						))}
 					</ul>
 					<button
 						type="button"
@@ -142,7 +148,7 @@ const Header = () => {
 									</button>
 								</li>
 								<li>
-									<button className="dropdown-item" href="#">
+									<button className="dropdown-item" onClick={logout}>
 										Log Out
 									</button>
 								</li>
