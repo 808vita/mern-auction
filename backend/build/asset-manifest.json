@@ -1,0 +1,16 @@
+{
+  "files": {
+    "main.css": "/static/css/main.8668d7fd.css",
+    "main.js": "/static/js/main.6a9c7066.js",
+    "static/media/catDealer.jpg": "/static/media/catDealer.d68d228e26faad4eeb86.jpg",
+    "static/media/catCar.jpg": "/static/media/catCar.591c289a0826bd57df6b.jpg",
+    "static/media/carImage.jpg": "/static/media/carImage.03b69c45a8c2baa664da.jpg",
+    "index.html": "/index.html",
+    "main.8668d7fd.css.map": "/static/css/main.8668d7fd.css.map",
+    "main.6a9c7066.js.map": "/static/js/main.6a9c7066.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.8668d7fd.css",
+    "static/js/main.6a9c7066.js"
+  ]
+}
