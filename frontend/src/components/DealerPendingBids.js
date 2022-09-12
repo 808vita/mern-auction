@@ -1,6 +1,6 @@
 import React from "react";
 import carPicture from "../resources/img/carImage.jpg";
-
+import formatDistanceToNow from "date-fns/formatDistanceToNow";
 const DealerPendingBids = ({ data }) => {
 	return (
 		<div className="container-fluid  mb-4 border border-primary outline-button">
@@ -22,7 +22,12 @@ const DealerPendingBids = ({ data }) => {
 							style={{ width: "18rem", height: "15rem" }}
 						>
 							<p>Bid Price : {data.price}</p>
-							<p>Created Bid : {data.createdAt}</p>
+							<p>
+								Created :{" "}
+								{formatDistanceToNow(new Date(data.createdAt), {
+									addSuffix: true,
+								})}
+							</p>
 
 							<span>
 								status: <span className="">{data.status}</span>

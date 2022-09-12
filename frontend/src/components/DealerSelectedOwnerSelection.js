@@ -1,6 +1,6 @@
 import React from "react";
 import ownerPic from "../resources/img/catCar.jpg";
-
+import formatDistanceToNow from "date-fns/formatDistanceToNow";
 const DealerSelectedOwnerSelection = ({ data }) => {
 	return (
 		<div className="row  text-center pt-3 ">
@@ -24,6 +24,12 @@ const DealerSelectedOwnerSelection = ({ data }) => {
 						<p>Car Make : {data.car}</p>
 						<p>Year: {data.year}</p>
 						<p>Account Type : Owner</p>
+						<p>
+							Completed :{" "}
+							{formatDistanceToNow(new Date(data.updatedAt), {
+								addSuffix: true,
+							})}
+						</p>
 					</div>
 				</div>
 			</div>

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import carPicture from "../resources/img/carImage.jpg";
 import { getOwnerBidsOfAcution } from "../resources/LoadData";
 import OwnerListBid from "./OwnerListBid";
-
+import formatDistanceToNow from "date-fns/formatDistanceToNow";
 const OwnerPendingAuctions = ({ data }) => {
 	const [clicked, setClicked] = useState(false);
 
@@ -43,6 +43,13 @@ const OwnerPendingAuctions = ({ data }) => {
 							<p>km : {data.km}</p>
 							<p>year : {data.year}</p>
 							<p>status: {data.status}</p>
+							<p>
+								Created :{" "}
+								{formatDistanceToNow(new Date(data.createdAt), {
+									addSuffix: true,
+								})}
+							</p>
+
 							<span
 								className={clicked ? `fa fa-arrow-down` : `fa fa-arrow-right`}
 							>

@@ -3,7 +3,7 @@ import carPicture from "../resources/img/carImage.jpg";
 import { checkBid } from "../resources/LoadData";
 
 import CreateBid from "./CreateBidForm";
-
+import formatDistanceToNow from "date-fns/formatDistanceToNow";
 const DealerLiveAuctions = ({ data }) => {
 	const [clicked, setClicked] = useState(false);
 	const [bidExisits, setBidExisits] = useState(false);
@@ -41,6 +41,12 @@ const DealerLiveAuctions = ({ data }) => {
 							<p>km : {data.km}</p>
 							<p>year : {data.year}</p>
 							<p>status: {data.status}</p>
+							<p>
+								Created :{" "}
+								{formatDistanceToNow(new Date(data.createdAt), {
+									addSuffix: true,
+								})}
+							</p>
 							<span
 								className={clicked ? `fa fa-arrow-down` : `fa fa-arrow-right`}
 							>

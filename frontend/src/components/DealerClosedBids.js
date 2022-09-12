@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import carPicture from "../resources/img/carImage.jpg";
 import { auctionDeatails } from "../resources/LoadData";
 import DealerSelectedOwnerSelection from "./DealerSelectedOwnerSelection";
+import formatDistanceToNow from "date-fns/formatDistanceToNow";
 
 const DealerClosedBids = ({ data }) => {
 	const [clicked, setClicked] = useState(false);
@@ -47,7 +48,12 @@ const DealerClosedBids = ({ data }) => {
 							style={{ width: "18rem", height: "15rem", objectFit: "cover" }}
 						>
 							<p>Bid Price: {data.price}</p>
-							<p>Added Bid : {data.createdAt}</p>
+							<p>
+								Added Bid :{" "}
+								{formatDistanceToNow(new Date(data.createdAt), {
+									addSuffix: true,
+								})}
+							</p>
 
 							<p>status: {data.status}</p>
 							<span

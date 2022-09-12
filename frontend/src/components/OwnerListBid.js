@@ -3,7 +3,7 @@ import dealerPic from "../resources/img/catDealer.jpg";
 import { useNavigate } from "react-router-dom";
 import { acceptBid } from "../resources/LoadData";
 import { useGlobalContext } from "../hooks/useGlobalContext";
-
+import formatDistanceToNow from "date-fns/formatDistanceToNow";
 const OwnerListBid = ({ data }) => {
 	const navigate = useNavigate();
 	const { setNotification } = useGlobalContext();
@@ -33,7 +33,12 @@ const OwnerListBid = ({ data }) => {
 						style={{ width: "18rem", height: "14rem" }}
 					>
 						<p>Bid Price : {data.price}</p>
-						<p>Bid Added: {data.createdAt}</p>
+						<p>
+							Bid Added:{" "}
+							{formatDistanceToNow(new Date(data.createdAt), {
+								addSuffix: true,
+							})}
+						</p>
 						<p>Account Type : Dealer</p>
 
 						<button

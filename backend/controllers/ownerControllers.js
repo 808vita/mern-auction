@@ -110,14 +110,16 @@ const acceptBid = async (req, res) => {
 		return res.status(404).json({ error: "no such record" });
 	}
 	const { auction_id } = bid;
-	const setToRejected = await Dealer.updateMany({
-		auction_id,
-		status: "rejected",
-	});
+	const setToRejected = await Dealer.updateMany(
+		{ auction_id },
+		{
+			status: "rejected",
+		}
+	);
 	let SelectedBid = await Dealer.findByIdAndUpdate(bidId, {
 		status: "selected",
 	});
-	SelectedBid = await Dealer.findById(bidId);
+	// SelectedBid = await Dealer.findById(bidId);
 	// console.log(SelectedBid);
 
 	const { user_id: selectedDealer } = SelectedBid;
@@ -126,30 +128,7 @@ const acceptBid = async (req, res) => {
 		selectedDealer: selectedDealer,
 	});
 
-	// completeAuction = await Owner.findById(completeAuction._id);
-
 	let dealerDetails = await User.findById(selectedDealer);
-
-	// this could be threat all details can be modified
-	//create status key:value in model
-	// let only status and bid _id from dealer to be fed in
-	//might need to validate the dealer bid contains the current auction id
-	//but seems extensive -> add if time allows
-
-	// const auction = await Owner.findOneAndUpdate(
-	// 	{ _id: id },
-	// 	{
-	// 		status
-	// 	}
-	// );
-
-	// if (!auction) {
-	// 	return res.status(400).json({
-	// 		error: "no such workout",
-	// 	});
-	// }
-
-	// res.status(200).json(auction);
 
 	res.status(200).json({ SelectedBid, completeAuction, dealerDetails });
 };

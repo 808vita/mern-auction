@@ -3,7 +3,7 @@ import carPicture from "../resources/img/carImage.jpg";
 import { getOwnerBidsOfAcution } from "../resources/LoadData";
 import OwnerListBid from "./OwnerListBid";
 import OwnerSelectedBid from "./OwnerSelectedBid";
-
+import formatDistanceToNow from "date-fns/formatDistanceToNow";
 const OwnerCompletedAuctions = ({ data }) => {
 	const [clicked, setClicked] = useState(false);
 
@@ -44,6 +44,13 @@ const OwnerCompletedAuctions = ({ data }) => {
 							<p>km : {data.km}</p>
 							<p>year : {data.year}</p>
 							<p>status: {data.status}</p>
+
+							<p>
+								completed :{" "}
+								{formatDistanceToNow(new Date(data.updatedAt), {
+									addSuffix: true,
+								})}
+							</p>
 							<span
 								className={clicked ? `fa fa-arrow-down` : `fa fa-arrow-right`}
 							>

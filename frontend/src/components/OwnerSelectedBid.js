@@ -1,5 +1,6 @@
 import React from "react";
 import dealerPic from "../resources/img/catDealer.jpg";
+import formatDistanceToNow from "date-fns/formatDistanceToNow";
 
 const OwnerSelectedBid = ({ data }) => {
 	return (
@@ -23,7 +24,12 @@ const OwnerSelectedBid = ({ data }) => {
 						<p>Dealer Name : {data.name}</p>
 						<p>Status : {data.status}</p>
 						<p>Bid Price : {data.price}</p>
-						<p>Bid Added: {data.createdAt}</p>
+						<p>
+							Bid Added:{" "}
+							{formatDistanceToNow(new Date(data.updatedAt), {
+								addSuffix: true,
+							})}
+						</p>
 						<p>Account Type : Dealer</p>
 					</div>
 				</div>
